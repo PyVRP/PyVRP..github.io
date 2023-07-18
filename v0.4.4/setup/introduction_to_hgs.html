@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A brief introduction to HGS &mdash; PyVRP 0.4.4 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Installation instructions" href="installation.html" />
+    <link rel="prev" title="A brief introduction to VRP" href="introduction_to_vrp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PyVRP
+          </a>
+              <div class="version">
+                0.4.4
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction_to_vrp.html">A brief introduction to VRP</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A brief introduction to HGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/vrptw.html">Vehicle Routing Problem with Time Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/cvrp.html">Capacitated Vehicle Routing Problem</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/pyvrp.html">PyVRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/crossover.html">Crossover operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/diversity.html">Diversity measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/search.html">Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/plotting.html">Plotting tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/stop.html">Stopping criteria</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developing PyVRP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/benchmarking.html">Benchmarking</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVRP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">A brief introduction to HGS</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/setup/introduction_to_hgs.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="a-brief-introduction-to-hgs">
+<h1>A brief introduction to HGS<a class="headerlink" href="#a-brief-introduction-to-hgs" title="Permalink to this heading"></a></h1>
+<p>PyVRP provides a high-performance implementation of the hybrid genetic search (HGS) algorithm for vehicle routing problems (VRPs).
+HGS combines the global search capabilities of genetic algorithms with the fine-tuning efficiency of (local) search methods.
+This hybrid approach allows for effective exploration and exploitation of the search space, leading to high-quality solutions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For a more thorough introduction to HGS for VRPs, we refer to the papers by <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S0305054812001645">Vidal et al. (2013)</a> and <a class="reference external" href="https://www.sciencedirect.com/science/article/pii/S030505482100349X">Vidal (2022)</a>.</p>
+</div>
+<p>The HGS algorithm works as follows.
+HGS maintains a population of solutions, which is initialised by a set of initial solutions given as input to the algorithm.
+In every iteration of the search loop, the algorithm selects two existing parent solutions from the population using a <em>k</em>-ary tournament, favouring solutions with higher fitness.
+A crossover operator then uses these two parent solutions to generate an offspring solution that inherits features from both parents.
+After the crossover, the offspring solution is further improved using a search procedure.
+The resulting candidate solution is first added to the population.
+If the candidate solution improves over the best solution found so far, it is also registered as the new best solution.
+Upon reaching the maximum population size, a survivor selection mechanism removes the least fit solutions until the population is back at the minimum size.
+The algorithm continues until a provided stopping criterion is met, at which point it returns the best solution found.</p>
+<p>In pseudocode, HGS works as follows:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line"><strong>Input:</strong> initial solutions <span class="math notranslate nohighlight">\(s_1, \dots, s_{n}\)</span></div>
+<div class="line"><strong>Output:</strong> the best-found solution <span class="math notranslate nohighlight">\(s^*\)</span></div>
+<div class="line">Set <span class="math notranslate nohighlight">\(s^*\)</span> to the initial solution with the best objective value</div>
+<div class="line"><strong>repeat</strong> until stopping criterion is met:</div>
+<div class="line-block">
+<div class="line">Select two parent solutions <span class="math notranslate nohighlight">\((s^{p_1}, s^{p_2})\)</span> from the population using <span class="math notranslate nohighlight">\(k\)</span>-ary tournament.</div>
+<div class="line">Apply crossover operator <span class="math notranslate nohighlight">\(XO\)</span> to generate an offspring solution <span class="math notranslate nohighlight">\(s^o=XO(s^{p_1}, s^{p_2})\)</span>.</div>
+<div class="line">Improve the offspring using a search procedure <span class="math notranslate nohighlight">\(LS\)</span> to obtain <span class="math notranslate nohighlight">\(s^c=LS(s^o)\)</span>.</div>
+<div class="line">Add the candidate solution to the population.</div>
+<div class="line"><strong>if</strong> <span class="math notranslate nohighlight">\(s^c\)</span> has a better objective value than <span class="math notranslate nohighlight">\(s^*\)</span>:</div>
+<div class="line-block">
+<div class="line"><span class="math notranslate nohighlight">\(s^* \gets s^c\)</span></div>
+</div>
+<div class="line"><strong>if</strong> population size exceeds maximum size:</div>
+<div class="line-block">
+<div class="line">Remove the solutions with the lowest fitness until the population is at minimum size</div>
+</div>
+</div>
+<div class="line"><strong>return</strong> <span class="math notranslate nohighlight">\(s^*\)</span></div>
+</div>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">pyvrp</span></code> package provides the HGS algorithm, crossover operators, stopping criteria, and various search procedures and operators.
+You only need to provide the initial solutions, for which we suggest taking random initial solutions to ensure diversity in the search.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>See the examples <a class="reference internal" href="../examples/cvrp.html"><span class="doc">capacitated VRP</span></a> and <a class="reference internal" href="../examples/vrptw.html"><span class="doc">VRP with time windows</span></a> on how to setup HGS to solve these VRPs.</p>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction_to_vrp.html" class="btn btn-neutral float-left" title="A brief introduction to VRP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation instructions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - 2023, PyVRP contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

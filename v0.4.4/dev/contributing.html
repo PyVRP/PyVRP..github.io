@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributing &mdash; PyVRP 0.4.4 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Benchmarking" href="benchmarking.html" />
+    <link rel="prev" title="Stopping criteria" href="../api/stop.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PyVRP
+          </a>
+              <div class="version">
+                0.4.4
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/introduction_to_vrp.html">A brief introduction to VRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/introduction_to_hgs.html">A brief introduction to HGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/installation.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/getting_help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/benchmarks.html">Benchmarks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/vrptw.html">Vehicle Routing Problem with Time Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/cvrp.html">Capacitated Vehicle Routing Problem</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/pyvrp.html">PyVRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/crossover.html">Crossover operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/diversity.html">Diversity measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/search.html">Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/plotting.html">Plotting tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/stop.html">Stopping criteria</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developing PyVRP</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-a-local-installation">Setting up a local installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-python-extensions">Building the Python extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#committing-changes">Committing changes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarking.html">Benchmarking</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVRP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Contributing</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/dev/contributing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contributing">
+<h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this heading"></a></h1>
+<p>Conversations about development and issues take place in the <a class="reference external" href="https://github.com/PyVRP/PyVRP/">GitHub repository</a>.
+Feel free to open a new issue if you have something to discuss.</p>
+<section id="setting-up-a-local-installation">
+<h2>Setting up a local installation<a class="headerlink" href="#setting-up-a-local-installation" title="Permalink to this heading"></a></h2>
+<p>Make sure you have a reasonably modern C++ compiler.
+Any recent version that supports (most of) the C++20 standard should do.
+Once you have a compiler installed, you can proceed by forking the <code class="docutils literal notranslate"><span class="pre">pyvrp</span></code> repository from the <a class="reference external" href="https://github.com/PyVRP/PyVRP/fork">GitHub website</a>.
+Then, clone your new fork to some local environment:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/&lt;your<span class="w"> </span>username&gt;/PyVRP.git
+</pre></div>
+</div>
+<p>Now, change into the PyVRP directory, and set-up the virtual environment using <code class="docutils literal notranslate"><span class="pre">poetry</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>PyVRP
+
+pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>poetry
+poetry<span class="w"> </span>install<span class="w"> </span>--with<span class="w"> </span>examples,docs,dev
+</pre></div>
+</div>
+<p>This might take a few minutes, but only needs to be done once.
+Now make sure everything runs smoothly, by executing the test suite:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>run<span class="w"> </span>pytest
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you use <a class="reference external" href="https://pre-commit.com/">pre-commit</a>, you can use our pre-commit configuration file to set that up too.
+Simply type:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+<p>After this completes, style and typing issues are automatically checked whenever you make a new commit to your feature branch.</p>
+</div>
+</section>
+<section id="building-the-python-extensions">
+<h2>Building the Python extensions<a class="headerlink" href="#building-the-python-extensions" title="Permalink to this heading"></a></h2>
+<p>For performance, the <code class="docutils literal notranslate"><span class="pre">PyVRP</span></code> packages uses a number of Python extensions that are written in C++.
+These extensions are built every time <code class="docutils literal notranslate"><span class="pre">poetry</span> <span class="pre">install</span></code> is used, but that command builds everything in release mode.
+While developing, one typically wants to use debug builds.
+These (and more) can be made by using the <code class="docutils literal notranslate"><span class="pre">build_extensions.py</span></code> script directly, as follows:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>build_extensions.py
+</pre></div>
+</div>
+<p>The script takes a number of command-line arguments, which you can discover using</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>build_extensions.py<span class="w"> </span>--help
+</pre></div>
+</div>
+<p>We use the Meson build system to compile the C++ extensions.
+Meson is configured using the <code class="docutils literal notranslate"><span class="pre">meson.build</span></code> file in the repository root.
+You should not have to touch this file often: all installation is handled via the <code class="docutils literal notranslate"><span class="pre">build_extensions.py</span></code> script.</p>
+</section>
+<section id="committing-changes">
+<h2>Committing changes<a class="headerlink" href="#committing-changes" title="Permalink to this heading"></a></h2>
+<p>We use pull requests to develop the <code class="docutils literal notranslate"><span class="pre">pyvrp</span></code> package.
+For a pull request to be accepted, you must meet the below requirements.
+This greatly reduces the job of maintaining and releasing the software.</p>
+<ul class="simple">
+<li><p><strong>One branch. One feature.</strong>
+Branches are cheap and GitHub makes it easy to merge and delete branches with a few clicks.
+Avoid the temptation to lump in a bunch of unrelated changes when working on a feature, if possible.
+This helps us keep track of what has changed when preparing a release.</p></li>
+<li><p>Commit messages should be clear and concise.
+This means a subject line of less than 80 characters, and, if necessary, a blank line followed by a commit message body.</p></li>
+<li><p>Code submissions should always include tests.</p></li>
+<li><p>Each function, class, method, and attribute needs to be documented using docstrings.
+We conform to the <a class="reference external" href="https://numpydoc.readthedocs.io/en/latest/format.html#docstring-standard">NumPy docstring standard</a>.</p></li>
+<li><p>If you are adding new functionality, you need to add it to the documentation by editing (or creating) the appropriate file in <code class="docutils literal notranslate"><span class="pre">docs/source/</span></code>.</p></li>
+<li><p>Make sure your documentation changes parse correctly.
+See the documentation in the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory for details on how to build the documentation locally.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please use the “Pull request” template on GitHub when opening a pull request.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../api/stop.html" class="btn btn-neutral float-left" title="Stopping criteria" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="benchmarking.html" class="btn btn-neutral float-right" title="Benchmarking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - 2023, PyVRP contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

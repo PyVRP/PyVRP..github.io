@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A brief introduction to VRP &mdash; PyVRP 0.4.4 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="A brief introduction to HGS" href="introduction_to_hgs.html" />
+    <link rel="prev" title="Contents" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PyVRP
+          </a>
+              <div class="version">
+                0.4.4
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">A brief introduction to VRP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#supported-vrp-variants">Supported VRP variants</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#capacitated-vehicle-routing-problem">Capacitated vehicle routing problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vehicle-routing-problem-with-time-windows">Vehicle routing problem with time windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prize-collecting-vehicle-routing-problem">Prize-collecting vehicle routing problem</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="introduction_to_hgs.html">A brief introduction to HGS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/vrptw.html">Vehicle Routing Problem with Time Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/cvrp.html">Capacitated Vehicle Routing Problem</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/pyvrp.html">PyVRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/crossover.html">Crossover operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/diversity.html">Diversity measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/search.html">Search</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/plotting.html">Plotting tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/stop.html">Stopping criteria</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developing PyVRP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/benchmarking.html">Benchmarking</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVRP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">A brief introduction to VRP</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/setup/introduction_to_vrp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="a-brief-introduction-to-vrp">
+<h1>A brief introduction to VRP<a class="headerlink" href="#a-brief-introduction-to-vrp" title="Permalink to this heading"></a></h1>
+<p>The vehicle routing problem (VRP) is one of the most studied problems in the field of operations research motivated by applications such as postal delivery, waste collection, and many more.
+The overarching goal of the VRP is to determine a set of vehicle routes to fulfil all (or some) transportation requests at the lowest possible cost.</p>
+<figure class="align-default">
+<img alt="A vehicle routing problem" src="../_images/introduction-to-vrp.svg" /></figure>
+<p>Motivated by the enormous potential for cost savings, creating algorithms to compute cost-efficient solutions has been a primary focus for VRP researchers.
+While finding a feasible solution for a given VRP is often relatively simple, obtaining the optimal solution can be considerably more complex as most VRP variants are classified as <a class="reference external" href="https://en.wikipedia.org/wiki/NP-hardness">NP-hard</a>.
+Various heuristics, metaheuristics, and exact methods have been developed to tackle the VRPs, including but not limited to, local search, genetic algorithms, and branch-and-cut algorithms.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>PyVRP primarily implements heuristic and metaheuristic algorithms for solving vehicle routing problems (VRPs).
+As these algorithms do not guarantee optimal solutions, we rigorously <a class="reference internal" href="benchmarks.html"><span class="doc">benchmark</span></a> them to evaluate their effectiveness.
+For a state-of-the-art exact solver, see, for example, <a class="reference external" href="https://github.com/inria-UFF/VRPSolverEasy">VRPSolverEasy</a>.</p>
+</div>
+<section id="supported-vrp-variants">
+<h2>Supported VRP variants<a class="headerlink" href="#supported-vrp-variants" title="Permalink to this heading"></a></h2>
+<p>In this section, we introduce the VRP variants that PyVRP currently supports.
+An extensive list of VRP variants can be found in <a class="reference external" href="https://doi.org/10.1137/1.9780898718515">Toth and Vigo (2014)</a>.</p>
+<p>In the following, we consider a complete graph <span class="math notranslate nohighlight">\(G=(V,A)\)</span>, where <span class="math notranslate nohighlight">\(V\)</span> is the vertex set and <span class="math notranslate nohighlight">\(A\)</span> is the arc set.
+The vertex set <span class="math notranslate nohighlight">\(V\)</span> is partitioned into <span class="math notranslate nohighlight">\(V=\{0\} \cup V_c\)</span>, where <span class="math notranslate nohighlight">\(0\)</span> represents the depot and <span class="math notranslate nohighlight">\(V_c=\{1, \dots, n\}\)</span> denotes the set of <span class="math notranslate nohighlight">\(n\)</span> clients.
+Each arc <span class="math notranslate nohighlight">\((i, j) \in A\)</span> has a weight <span class="math notranslate nohighlight">\(d_{ij} \ge 0\)</span> that represents the travelling cost (e.g., distance) when going from <span class="math notranslate nohighlight">\(i \in V\)</span> to <span class="math notranslate nohighlight">\(j \in V\)</span>.
+A fleet of vehicles <span class="math notranslate nohighlight">\(K = \{1, 2, \dots, |K| \}\)</span> is assumed to be available at the depot.</p>
+<section id="capacitated-vehicle-routing-problem">
+<h3>Capacitated vehicle routing problem<a class="headerlink" href="#capacitated-vehicle-routing-problem" title="Permalink to this heading"></a></h3>
+<p>The most studied variant of the vehicle routing problem is the <em>capacitated vehicle routing problem</em> (CVRP).
+In this variant, each client <span class="math notranslate nohighlight">\(i \in V_c\)</span> has a demand <span class="math notranslate nohighlight">\(q_{i} \ge 0\)</span>.
+It is also assumed that the fleet of vehicles <span class="math notranslate nohighlight">\(K\)</span> is homogeneous, meaning that they all have the same maximum capacity <span class="math notranslate nohighlight">\(Q &gt; 0\)</span>.</p>
+<p>A feasible solution to the CVRP consists of a set of routes that all begin and end at the depot, such that each client is visited exactly once and none of the routes exceeds the vehicle capacity.
+The objective is to find a feasible solution that minimises the total travelling cost.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Check out <a class="reference internal" href="../examples/cvrp.html"><span class="std std-ref">this example notebook</span></a> in which we solve a CVRP instance.</p>
+</div>
+</section>
+<section id="vehicle-routing-problem-with-time-windows">
+<h3>Vehicle routing problem with time windows<a class="headerlink" href="#vehicle-routing-problem-with-time-windows" title="Permalink to this heading"></a></h3>
+<p>The vehicle routing problem with time windows (VRPTW) is a variant of the VRP that introduces timing constraints.
+Each arc <span class="math notranslate nohighlight">\((i, j) \in A\)</span> has an additional parameter <span class="math notranslate nohighlight">\(t_{ij}\)</span>, denoting the travel time from location <span class="math notranslate nohighlight">\(i\)</span> to <span class="math notranslate nohighlight">\(j\)</span>.
+Each client <span class="math notranslate nohighlight">\(i \in V_c\)</span> has a demand <span class="math notranslate nohighlight">\(q_{i} \ge 0\)</span>, a service time <span class="math notranslate nohighlight">\(s_{i} \ge 0\)</span> and a time window <span class="math notranslate nohighlight">\(\left[e_i, l_i\right]\)</span> that denotes the earliest and latest time that service can start at the client.
+A vehicle is allowed to arrive at a location before the beginning of the time window, but it must wait for the window to open to start the service.
+The depot has a time window <span class="math notranslate nohighlight">\(\left[0, H \right]\)</span>, where <span class="math notranslate nohighlight">\(H\)</span> is the latest time at which all vehicles must have returned.</p>
+<p>A feasible solution to the VRPTW consists of a set of routes in which all clients are visited within the specified time window and all vehicles return to the depot in time.
+The objective is to find a feasible solution that minimises the total travel cost.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Check out <a class="reference internal" href="../examples/vrptw.html"><span class="std std-ref">this example notebook</span></a> in which we solve a VRPTW instance.</p>
+</div>
+</section>
+<section id="prize-collecting-vehicle-routing-problem">
+<h3>Prize-collecting vehicle routing problem<a class="headerlink" href="#prize-collecting-vehicle-routing-problem" title="Permalink to this heading"></a></h3>
+<p>In the prize-collecting vehicle routing problem (PC-VRP), it is not mandatory to visit all clients.
+Some customer visits may be required, but most are considered optional, and customers have a prize <span class="math notranslate nohighlight">\(p_i \ge 0\)</span> that is collected when client <span class="math notranslate nohighlight">\(i\)</span> is visited.
+The goal is to balance the competing goals of minimising travel costs while maximising the collected prizes.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="introduction_to_hgs.html" class="btn btn-neutral float-right" title="A brief introduction to HGS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - 2023, PyVRP contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
