@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Education &mdash; PyVRP 0.2.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Plotting tools" href="plotting.html" />
+    <link rel="prev" title="Diversity measures" href="diversity.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PyVRP
+          </a>
+              <div class="version">
+                0.2.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/introduction_to_hgs.html">A brief introduction to HGS for VRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/installation.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/getting_help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/benchmarks.html">Benchmarks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/vrptw.html">Vehicle Routing Problem with Time Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/cvrp.html">Capacitated Vehicle Routing Problem</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="pyvrp.html">PyVRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crossover.html">Crossover operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html">Diagnostic results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diversity.html">Diversity measures</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Education</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch"><code class="docutils literal notranslate"><span class="pre">LocalSearch</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.add_node_operator"><code class="docutils literal notranslate"><span class="pre">LocalSearch.add_node_operator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.add_route_operator"><code class="docutils literal notranslate"><span class="pre">LocalSearch.add_route_operator()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.get_neighbours"><code class="docutils literal notranslate"><span class="pre">LocalSearch.get_neighbours()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.intensify"><code class="docutils literal notranslate"><span class="pre">LocalSearch.intensify()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.run"><code class="docutils literal notranslate"><span class="pre">LocalSearch.run()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.search"><code class="docutils literal notranslate"><span class="pre">LocalSearch.search()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.set_neighbours"><code class="docutils literal notranslate"><span class="pre">LocalSearch.set_neighbours()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.educate.neighbourhood.NeighbourhoodParams"><code class="docutils literal notranslate"><span class="pre">NeighbourhoodParams</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.educate.neighbourhood.compute_neighbours"><code class="docutils literal notranslate"><span class="pre">compute_neighbours()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#node-operators">Node operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._Exchange.Exchange10"><code class="docutils literal notranslate"><span class="pre">Exchange10</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._Exchange.Exchange20"><code class="docutils literal notranslate"><span class="pre">Exchange20</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._Exchange.Exchange30"><code class="docutils literal notranslate"><span class="pre">Exchange30</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._Exchange.Exchange11"><code class="docutils literal notranslate"><span class="pre">Exchange11</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._Exchange.Exchange21"><code class="docutils literal notranslate"><span class="pre">Exchange21</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._Exchange.Exchange31"><code class="docutils literal notranslate"><span class="pre">Exchange31</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._Exchange.Exchange22"><code class="docutils literal notranslate"><span class="pre">Exchange22</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._Exchange.Exchange32"><code class="docutils literal notranslate"><span class="pre">Exchange32</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._Exchange.Exchange33"><code class="docutils literal notranslate"><span class="pre">Exchange33</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._MoveTwoClientsReversed.MoveTwoClientsReversed"><code class="docutils literal notranslate"><span class="pre">MoveTwoClientsReversed</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._TwoOpt.TwoOpt"><code class="docutils literal notranslate"><span class="pre">TwoOpt</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#route-operators">Route operators</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._RelocateStar.RelocateStar"><code class="docutils literal notranslate"><span class="pre">RelocateStar</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.educate._SwapStar.SwapStar"><code class="docutils literal notranslate"><span class="pre">SwapStar</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stop.html">Stopping criteria</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developing PyVRP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/benchmarking.html">Benchmarking</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVRP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Education</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/educate.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <span class="target" id="module-pyvrp.educate"></span><section id="education">
+<h1>Education<a class="headerlink" href="#education" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="#module-pyvrp.educate" title="pyvrp.educate: Education"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyvrp.educate</span></code></a> module contains classes and methods responsible for educating (improving) a newly created offspring solution.
+This happens just after <a class="reference internal" href="crossover.html#module-pyvrp.crossover" title="pyvrp.crossover: Crossover operators"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyvrp.crossover</span></code></a> is performed by the <a class="reference internal" href="pyvrp.html#pyvrp.GeneticAlgorithm.GeneticAlgorithm" title="pyvrp.GeneticAlgorithm.GeneticAlgorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeneticAlgorithm</span></code></a>.</p>
+<span class="target" id="module-pyvrp.educate.LocalSearch"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate.LocalSearch.LocalSearch">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">LocalSearch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._ProblemData.ProblemData" title="pyvrp._ProblemData.ProblemData"><span class="pre">ProblemData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._XorShift128.XorShift128" title="pyvrp._XorShift128.XorShift128"><span class="pre">XorShift128</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">neighbours</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate.LocalSearch.LocalSearch" title="Permalink to this definition"></a></dt>
+<dd><p>LocalSearch educator. This educator is able to explore a granular
+neighbourhood in a very efficient manner using user-provided node and route
+operators. This quickly results in much improved (‘educated’) solutions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong></dt><dd><p>Data object describing the problem to be solved.</p>
+</dd>
+<dt><strong>rng</strong></dt><dd><p>Random number generator.</p>
+</dd>
+<dt><strong>neighbours</strong></dt><dd><p>List of lists that defines the local search neighbourhood.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.add_node_operator" title="pyvrp.educate.LocalSearch.LocalSearch.add_node_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_node_operator</span></code></a>(op)</p></td>
+<td><p>Adds a node operator to this local search object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.add_route_operator" title="pyvrp.educate.LocalSearch.LocalSearch.add_route_operator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add_route_operator</span></code></a>(op)</p></td>
+<td><p>Adds a route operator to this local search object.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.get_neighbours" title="pyvrp.educate.LocalSearch.LocalSearch.get_neighbours"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_neighbours</span></code></a>()</p></td>
+<td><p>Returns the granular neighbourhood currently used by the local search.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.intensify" title="pyvrp.educate.LocalSearch.LocalSearch.intensify"><code class="xref py py-obj docutils literal notranslate"><span class="pre">intensify</span></code></a>(individual, cost_evaluator[, ...])</p></td>
+<td><p>This method uses the intensifying route operators on this local search object to improve the given individual.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.run" title="pyvrp.educate.LocalSearch.LocalSearch.run"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run</span></code></a>(individual, cost_evaluator, should_intensify)</p></td>
+<td><p>This method uses the <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.search" title="pyvrp.educate.LocalSearch.LocalSearch.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">search()</span></code></a> and <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.intensify" title="pyvrp.educate.LocalSearch.LocalSearch.intensify"><code class="xref py py-meth docutils literal notranslate"><span class="pre">intensify()</span></code></a> methods to iteratively improve the given individual.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.search" title="pyvrp.educate.LocalSearch.LocalSearch.search"><code class="xref py py-obj docutils literal notranslate"><span class="pre">search</span></code></a>(individual, cost_evaluator)</p></td>
+<td><p>This method uses the node operators on this local search object to improve the given individual.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.set_neighbours" title="pyvrp.educate.LocalSearch.LocalSearch.set_neighbours"><code class="xref py py-obj docutils literal notranslate"><span class="pre">set_neighbours</span></code></a>(neighbours)</p></td>
+<td><p>Convenience method to replace the current granular neighbourhood used by the local search object.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.educate.LocalSearch.LocalSearch.add_node_operator">
+<span class="sig-name descname"><span class="pre">add_node_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate.LocalSearch.LocalSearch.add_node_operator" title="Permalink to this definition"></a></dt>
+<dd><p>Adds a node operator to this local search object. The node operator
+will be used by <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.search" title="pyvrp.educate.LocalSearch.LocalSearch.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">search()</span></code></a> to improve an individual.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>op</strong></dt><dd><p>The node operator to add to this local search object.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.educate.LocalSearch.LocalSearch.add_route_operator">
+<span class="sig-name descname"><span class="pre">add_route_operator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">op</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate.LocalSearch.LocalSearch.add_route_operator" title="Permalink to this definition"></a></dt>
+<dd><p>Adds a route operator to this local search object. The route operator
+will be used by <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.intensify" title="pyvrp.educate.LocalSearch.LocalSearch.intensify"><code class="xref py py-meth docutils literal notranslate"><span class="pre">intensify()</span></code></a> to improve an individual using more
+expensive route operators.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>op</strong></dt><dd><p>The route operator to add to this local search object.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.educate.LocalSearch.LocalSearch.get_neighbours">
+<span class="sig-name descname"><span class="pre">get_neighbours</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyvrp.educate.LocalSearch.LocalSearch.get_neighbours" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the granular neighbourhood currently used by the local search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a></dt><dd><p>The current granular neighbourhood.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.educate.LocalSearch.LocalSearch.intensify">
+<span class="sig-name descname"><span class="pre">intensify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost_evaluator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._CostEvaluator.CostEvaluator" title="pyvrp._CostEvaluator.CostEvaluator"><span class="pre">CostEvaluator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">overlap_tolerance_degrees</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyvrp.html#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a></span></span><a class="headerlink" href="#pyvrp.educate.LocalSearch.LocalSearch.intensify" title="Permalink to this definition"></a></dt>
+<dd><p>This method uses the intensifying route operators on this local search
+object to improve the given individual. To limit the computation
+demands of intensification, the  <code class="docutils literal notranslate"><span class="pre">overlap_tolerance_degrees</span></code> argument
+can be used to limit the number of route pairs that are evaluated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>individual</strong></dt><dd><p>The individual to improve.</p>
+</dd>
+<dt><strong>cost_evaluator</strong></dt><dd><p>Cost evaluator to use.</p>
+</dd>
+<dt><strong>overlap_tolerance_degrees</strong></dt><dd><p>This method evaluates improving moves between route pairs. To limit
+computational efforts, by default not all route pairs are
+considered: only those route pairs that share some overlap when
+considering their center’s angle from the depot are evaluted.
+This parameter controls the amount of overlap needed before two
+routes are evaluated.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Individual</span></code></dt><dd><p>The improved individual. This is not the same object as the
+individual that was passed in.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RuntimeError</span></code></a></dt><dd><p>When this method is called before registering route operators.
+Operators can be registered using <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.add_route_operator" title="pyvrp.educate.LocalSearch.LocalSearch.add_route_operator"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_route_operator()</span></code></a>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.educate.LocalSearch.LocalSearch.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost_evaluator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._CostEvaluator.CostEvaluator" title="pyvrp._CostEvaluator.CostEvaluator"><span class="pre">CostEvaluator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">should_intensify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyvrp.html#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a></span></span><a class="headerlink" href="#pyvrp.educate.LocalSearch.LocalSearch.run" title="Permalink to this definition"></a></dt>
+<dd><p>This method uses the <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.search" title="pyvrp.educate.LocalSearch.LocalSearch.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">search()</span></code></a> and <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.intensify" title="pyvrp.educate.LocalSearch.LocalSearch.intensify"><code class="xref py py-meth docutils literal notranslate"><span class="pre">intensify()</span></code></a> methods to
+iteratively improve the given individual. First, <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.search" title="pyvrp.educate.LocalSearch.LocalSearch.search"><code class="xref py py-meth docutils literal notranslate"><span class="pre">search()</span></code></a> is
+applied. Thereafter, if <code class="docutils literal notranslate"><span class="pre">should_intensify</span></code> is true,
+<a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.intensify" title="pyvrp.educate.LocalSearch.LocalSearch.intensify"><code class="xref py py-meth docutils literal notranslate"><span class="pre">intensify()</span></code></a> is applied. This process repeats until no further
+improvements are found. Finally, the improved solution is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>individual</strong></dt><dd><p>The individual to improve through local search.</p>
+</dd>
+<dt><strong>cost_evaluator</strong></dt><dd><p>Cost evaluator to use.</p>
+</dd>
+<dt><strong>should_intensify</strong></dt><dd><p>Whether to apply <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.intensify" title="pyvrp.educate.LocalSearch.LocalSearch.intensify"><code class="xref py py-meth docutils literal notranslate"><span class="pre">intensify()</span></code></a>. Intensification can provide
+much better solutions, but is computationally demanding. By default
+intensification is applied.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Individual</span></code></dt><dd><p>The improved individual. This is not the same object as the
+individual that was passed in.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.educate.LocalSearch.LocalSearch.search">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cost_evaluator</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._CostEvaluator.CostEvaluator" title="pyvrp._CostEvaluator.CostEvaluator"><span class="pre">CostEvaluator</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="pyvrp.html#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a></span></span><a class="headerlink" href="#pyvrp.educate.LocalSearch.LocalSearch.search" title="Permalink to this definition"></a></dt>
+<dd><p>This method uses the node operators on this local search object to
+improve the given individual.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>individual</strong></dt><dd><p>The individual to improve.</p>
+</dd>
+<dt><strong>cost_evaluator</strong></dt><dd><p>Cost evaluator to use.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Individual</span></code></dt><dd><p>The improved individual. This is not the same object as the
+individual that was passed in.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RuntimeError</span></code></a></dt><dd><p>When this method is called before registering node operators.
+Operators can be registered using <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.add_node_operator" title="pyvrp.educate.LocalSearch.LocalSearch.add_node_operator"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_node_operator()</span></code></a>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.educate.LocalSearch.LocalSearch.set_neighbours">
+<span class="sig-name descname"><span class="pre">set_neighbours</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">neighbours</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate.LocalSearch.LocalSearch.set_neighbours" title="Permalink to this definition"></a></dt>
+<dd><p>Convenience method to replace the current granular neighbourhood used
+by the local search object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>neighbours</strong></dt><dd><p>A new granular neighbourhood.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pyvrp.educate.neighbourhood"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate.neighbourhood.NeighbourhoodParams">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NeighbourhoodParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weight_wait_time</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight_time_warp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_granular</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">40</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetric_proximity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symmetric_neighbours</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate.neighbourhood.NeighbourhoodParams" title="Permalink to this definition"></a></dt>
+<dd><p>Configuration for calculating a granular neighbourhood.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueError</span></code></a></dt><dd><p>When <code class="docutils literal notranslate"><span class="pre">nb_granular</span></code> is non-positive.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Attributes<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>weight_wait_time</strong></dt><dd><p>Weight given to the minimum wait time aspect of the proximity
+calculation. A large wait time indicates the clients are far apart
+in duration/time.</p>
+</dd>
+<dt><strong>weight_time_warp</strong></dt><dd><p>Weight given to the minimum time warp aspect of the proximity
+calculation. A large time warp indicates the clients are far apart in
+duration/time.</p>
+</dd>
+<dt><strong>nb_granular</strong></dt><dd><p>Number of other clients that are in each client’s granular
+neighbourhood. This parameter determines the size of the overall
+neighbourhood.</p>
+</dd>
+<dt><strong>symmetric_proximity</strong></dt><dd><p>Whether to calculate a symmetric proximity matrix. This ensures edge
+<span class="math notranslate nohighlight">\((i, j)\)</span> is given the same weight as <span class="math notranslate nohighlight">\((j, i)\)</span>.</p>
+</dd>
+<dt><strong>symmetric_neighbours</strong></dt><dd><p>Whether to symmetrise the neighbourhood structure. This ensures that
+when edge <span class="math notranslate nohighlight">\((i, j)\)</span> is in, then so is <span class="math notranslate nohighlight">\((j, i)\)</span>. Note that
+this is <em>not</em> the same as <code class="docutils literal notranslate"><span class="pre">symmetric_proximity</span></code>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.educate.neighbourhood.compute_neighbours">
+<span class="sig-name descname"><span class="pre">compute_neighbours</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._ProblemData.ProblemData" title="pyvrp._ProblemData.ProblemData"><span class="pre">ProblemData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp.educate.neighbourhood.NeighbourhoodParams" title="pyvrp.educate.neighbourhood.NeighbourhoodParams"><span class="pre">NeighbourhoodParams</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">NeighbourhoodParams(weight_wait_time=0.2,</span> <span class="pre">weight_time_warp=1.0,</span> <span class="pre">nb_granular=40,</span> <span class="pre">symmetric_proximity=True,</span> <span class="pre">symmetric_neighbours=False)</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyvrp.educate.neighbourhood.compute_neighbours" title="Permalink to this definition"></a></dt>
+<dd><p>Computes neighbours defining the neighbourhood for a problem instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong></dt><dd><p>ProblemData for which to compute the neighbourhood.</p>
+</dd>
+<dt><strong>params</strong></dt><dd><p>NeighbourhoodParams that define how the neighbourhood is computed.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Neighbours</span></code></dt><dd><p>A list of list of integers representing the neighbours for each client.
+The first element represents the depot and is an empty list.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<section id="node-operators">
+<h2>Node operators<a class="headerlink" href="#node-operators" title="Permalink to this heading"></a></h2>
+<p>Instances of these operators can be added to the <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch" title="pyvrp.educate.LocalSearch.LocalSearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalSearch</span></code></a> object via the <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.add_node_operator" title="pyvrp.educate.LocalSearch.LocalSearch.add_node_operator"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_node_operator()</span></code></a> method.
+As a convenience, the <a class="reference internal" href="#module-pyvrp.educate" title="pyvrp.educate: Education"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyvrp.educate</span></code></a> module makes all these operators available as <code class="docutils literal notranslate"><span class="pre">NODE_OPERATORS</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyvrp.educate</span> <span class="kn">import</span> <span class="n">NODE_OPERATORS</span>
+</pre></div>
+</div>
+<span class="target" id="module-pyvrp.educate._Exchange"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._Exchange.Exchange10">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Exchange10</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._Exchange.Exchange10" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._Exchange.Exchange20">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Exchange20</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._Exchange.Exchange20" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._Exchange.Exchange30">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Exchange30</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._Exchange.Exchange30" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._Exchange.Exchange11">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Exchange11</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._Exchange.Exchange11" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._Exchange.Exchange21">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Exchange21</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._Exchange.Exchange21" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._Exchange.Exchange31">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Exchange31</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._Exchange.Exchange31" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._Exchange.Exchange22">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Exchange22</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._Exchange.Exchange22" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._Exchange.Exchange32">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Exchange32</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._Exchange.Exchange32" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._Exchange.Exchange33">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Exchange33</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._Exchange.Exchange33" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<span class="target" id="module-pyvrp.educate._MoveTwoClientsReversed"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._MoveTwoClientsReversed.MoveTwoClientsReversed">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MoveTwoClientsReversed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._MoveTwoClientsReversed.MoveTwoClientsReversed" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<span class="target" id="module-pyvrp.educate._TwoOpt"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._TwoOpt.TwoOpt">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TwoOpt</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._TwoOpt.TwoOpt" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="route-operators">
+<h2>Route operators<a class="headerlink" href="#route-operators" title="Permalink to this heading"></a></h2>
+<p>Instances of these operators can be added to the <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch" title="pyvrp.educate.LocalSearch.LocalSearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocalSearch</span></code></a> object via the <a class="reference internal" href="#pyvrp.educate.LocalSearch.LocalSearch.add_route_operator" title="pyvrp.educate.LocalSearch.LocalSearch.add_route_operator"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_route_operator()</span></code></a> method.
+As a convenience, the <a class="reference internal" href="#module-pyvrp.educate" title="pyvrp.educate: Education"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyvrp.educate</span></code></a> module makes all these operators available as <code class="docutils literal notranslate"><span class="pre">ROUTE_OPERATORS</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyvrp.educate</span> <span class="kn">import</span> <span class="n">ROUTE_OPERATORS</span>
+</pre></div>
+</div>
+<span class="target" id="module-pyvrp.educate._RelocateStar"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._RelocateStar.RelocateStar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">RelocateStar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._RelocateStar.RelocateStar" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<span class="target" id="module-pyvrp.educate._SwapStar"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.educate._SwapStar.SwapStar">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">SwapStar</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.ProblemData</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.educate._SwapStar.SwapStar" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="diversity.html" class="btn btn-neutral float-left" title="Diversity measures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="plotting.html" class="btn btn-neutral float-right" title="Plotting tools" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - 2023, PyVRP contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

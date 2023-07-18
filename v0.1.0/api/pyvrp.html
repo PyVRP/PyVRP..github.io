@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyVRP &mdash; PyVRP 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Crossover operators" href="crossover.html" />
+    <link rel="prev" title="Capacitated Vehicle Routing Problem" href="../examples/cvrp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PyVRP
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/introduction_to_hgs.html">A brief introduction to HGS for VRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/installation.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/getting_help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/benchmarks.html">Benchmarks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/vrptw.html">Vehicle Routing Problem with Time Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/cvrp.html">Capacitated Vehicle Routing Problem</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">PyVRP</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams"><code class="docutils literal notranslate"><span class="pre">GeneticAlgorithmParams</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.collect_statistics"><code class="docutils literal notranslate"><span class="pre">GeneticAlgorithmParams.collect_statistics</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.intensify_on_best"><code class="docutils literal notranslate"><span class="pre">GeneticAlgorithmParams.intensify_on_best</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.intensify_probability"><code class="docutils literal notranslate"><span class="pre">GeneticAlgorithmParams.intensify_probability</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.nb_iter_no_improvement"><code class="docutils literal notranslate"><span class="pre">GeneticAlgorithmParams.nb_iter_no_improvement</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.repair_probability"><code class="docutils literal notranslate"><span class="pre">GeneticAlgorithmParams.repair_probability</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithm"><code class="docutils literal notranslate"><span class="pre">GeneticAlgorithm</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithm.run"><code class="docutils literal notranslate"><span class="pre">GeneticAlgorithm.run()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp._Individual.Individual"><code class="docutils literal notranslate"><span class="pre">Individual</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._Individual.Individual.cost"><code class="docutils literal notranslate"><span class="pre">Individual.cost()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._Individual.Individual.get_neighbours"><code class="docutils literal notranslate"><span class="pre">Individual.get_neighbours()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._Individual.Individual.get_routes"><code class="docutils literal notranslate"><span class="pre">Individual.get_routes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._Individual.Individual.has_excess_capacity"><code class="docutils literal notranslate"><span class="pre">Individual.has_excess_capacity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._Individual.Individual.has_time_warp"><code class="docutils literal notranslate"><span class="pre">Individual.has_time_warp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._Individual.Individual.is_feasible"><code class="docutils literal notranslate"><span class="pre">Individual.is_feasible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._Individual.Individual.num_routes"><code class="docutils literal notranslate"><span class="pre">Individual.num_routes()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams"><code class="docutils literal notranslate"><span class="pre">PenaltyParams</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams.init_capacity_penalty"><code class="docutils literal notranslate"><span class="pre">PenaltyParams.init_capacity_penalty</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams.init_time_warp_penalty"><code class="docutils literal notranslate"><span class="pre">PenaltyParams.init_time_warp_penalty</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams.num_registrations_between_penalty_updates"><code class="docutils literal notranslate"><span class="pre">PenaltyParams.num_registrations_between_penalty_updates</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams.penalty_decrease"><code class="docutils literal notranslate"><span class="pre">PenaltyParams.penalty_decrease</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams.penalty_increase"><code class="docutils literal notranslate"><span class="pre">PenaltyParams.penalty_increase</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams.repair_booster"><code class="docutils literal notranslate"><span class="pre">PenaltyParams.repair_booster</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams.target_feasible"><code class="docutils literal notranslate"><span class="pre">PenaltyParams.target_feasible</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyManager"><code class="docutils literal notranslate"><span class="pre">PenaltyManager</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyManager.get_penalty_booster"><code class="docutils literal notranslate"><span class="pre">PenaltyManager.get_penalty_booster()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyManager.load_penalty"><code class="docutils literal notranslate"><span class="pre">PenaltyManager.load_penalty()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyManager.register_load_feasible"><code class="docutils literal notranslate"><span class="pre">PenaltyManager.register_load_feasible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyManager.register_time_feasible"><code class="docutils literal notranslate"><span class="pre">PenaltyManager.register_time_feasible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyManager.tw_penalty"><code class="docutils literal notranslate"><span class="pre">PenaltyManager.tw_penalty()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.Population.PopulationParams"><code class="docutils literal notranslate"><span class="pre">PopulationParams</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.PopulationParams.generation_size"><code class="docutils literal notranslate"><span class="pre">PopulationParams.generation_size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.PopulationParams.lb_diversity"><code class="docutils literal notranslate"><span class="pre">PopulationParams.lb_diversity</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.PopulationParams.max_pop_size"><code class="docutils literal notranslate"><span class="pre">PopulationParams.max_pop_size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.PopulationParams.min_pop_size"><code class="docutils literal notranslate"><span class="pre">PopulationParams.min_pop_size</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.PopulationParams.nb_close"><code class="docutils literal notranslate"><span class="pre">PopulationParams.nb_close</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.PopulationParams.nb_elite"><code class="docutils literal notranslate"><span class="pre">PopulationParams.nb_elite</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.PopulationParams.ub_diversity"><code class="docutils literal notranslate"><span class="pre">PopulationParams.ub_diversity</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.Population.Population"><code class="docutils literal notranslate"><span class="pre">Population</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.Population.__iter__"><code class="docutils literal notranslate"><span class="pre">Population.__iter__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.Population.__len__"><code class="docutils literal notranslate"><span class="pre">Population.__len__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.Population.add"><code class="docutils literal notranslate"><span class="pre">Population.add()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.Population.get_binary_tournament"><code class="docutils literal notranslate"><span class="pre">Population.get_binary_tournament()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.Population.num_feasible"><code class="docutils literal notranslate"><span class="pre">Population.num_feasible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.Population.num_infeasible"><code class="docutils literal notranslate"><span class="pre">Population.num_infeasible()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.Population.restart"><code class="docutils literal notranslate"><span class="pre">Population.restart()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Population.Population.select"><code class="docutils literal notranslate"><span class="pre">Population.select()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp._ProblemData.Client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.Client.demand"><code class="docutils literal notranslate"><span class="pre">Client.demand</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.Client.service_duration"><code class="docutils literal notranslate"><span class="pre">Client.service_duration</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.Client.tw_early"><code class="docutils literal notranslate"><span class="pre">Client.tw_early</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.Client.tw_late"><code class="docutils literal notranslate"><span class="pre">Client.tw_late</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.Client.x"><code class="docutils literal notranslate"><span class="pre">Client.x</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.Client.y"><code class="docutils literal notranslate"><span class="pre">Client.y</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp._ProblemData.ProblemData"><code class="docutils literal notranslate"><span class="pre">ProblemData</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.ProblemData.client"><code class="docutils literal notranslate"><span class="pre">ProblemData.client()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.ProblemData.depot"><code class="docutils literal notranslate"><span class="pre">ProblemData.depot()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.ProblemData.dist"><code class="docutils literal notranslate"><span class="pre">ProblemData.dist()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.ProblemData.distance_matrix"><code class="docutils literal notranslate"><span class="pre">ProblemData.distance_matrix()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.ProblemData.num_clients"><code class="docutils literal notranslate"><span class="pre">ProblemData.num_clients</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.ProblemData.num_vehicles"><code class="docutils literal notranslate"><span class="pre">ProblemData.num_vehicles</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._ProblemData.ProblemData.vehicle_capacity"><code class="docutils literal notranslate"><span class="pre">ProblemData.vehicle_capacity</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.read.read"><code class="docutils literal notranslate"><span class="pre">read()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.read.read_solution"><code class="docutils literal notranslate"><span class="pre">read_solution()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.Result.Result"><code class="docutils literal notranslate"><span class="pre">Result</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Result.Result.cost"><code class="docutils literal notranslate"><span class="pre">Result.cost()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Result.Result.has_statistics"><code class="docutils literal notranslate"><span class="pre">Result.has_statistics()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Result.Result.is_feasible"><code class="docutils literal notranslate"><span class="pre">Result.is_feasible()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.show_versions.show_versions"><code class="docutils literal notranslate"><span class="pre">show_versions()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.Statistics.Statistics"><code class="docutils literal notranslate"><span class="pre">Statistics</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Statistics.Statistics.collect_from"><code class="docutils literal notranslate"><span class="pre">Statistics.collect_from()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Statistics.Statistics.from_csv"><code class="docutils literal notranslate"><span class="pre">Statistics.from_csv()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp.Statistics.Statistics.to_csv"><code class="docutils literal notranslate"><span class="pre">Statistics.to_csv()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp._XorShift128.XorShift128"><code class="docutils literal notranslate"><span class="pre">XorShift128</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._XorShift128.XorShift128.__call__"><code class="docutils literal notranslate"><span class="pre">XorShift128.__call__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._XorShift128.XorShift128.__init__"><code class="docutils literal notranslate"><span class="pre">XorShift128.__init__()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._XorShift128.XorShift128.max"><code class="docutils literal notranslate"><span class="pre">XorShift128.max()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._XorShift128.XorShift128.min"><code class="docutils literal notranslate"><span class="pre">XorShift128.min()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._XorShift128.XorShift128.rand"><code class="docutils literal notranslate"><span class="pre">XorShift128.rand()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pyvrp._XorShift128.XorShift128.randint"><code class="docutils literal notranslate"><span class="pre">XorShift128.randint()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="crossover.html">Crossover operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html">Diagnostic results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diversity.html">Diversity measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="educate.html">Education</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stop.html">Stopping criteria</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developing PyVRP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/benchmarking.html">Benchmarking</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVRP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">PyVRP</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/pyvrp.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <span class="target" id="module-pyvrp"></span><section id="pyvrp">
+<h1>PyVRP<a class="headerlink" href="#pyvrp" title="Permalink to this heading"></a></h1>
+<p>The top-level <a class="reference internal" href="#module-pyvrp" title="pyvrp: PyVRP"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyvrp</span></code></a> module exposes several core classes needed to run the VRP solver.
+These include the core <a class="reference internal" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithm" title="pyvrp.GeneticAlgorithm.GeneticAlgorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeneticAlgorithm</span></code></a>, and the <a class="reference internal" href="#pyvrp.Population.Population" title="pyvrp.Population.Population"><code class="xref py py-class docutils literal notranslate"><span class="pre">Population</span></code></a> that manages <a class="reference internal" href="#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><code class="xref py py-class docutils literal notranslate"><span class="pre">Individual</span></code></a> solutions.
+Most classes take parameter objects that allow for advanced configuration - but sensible defaults are also provided.
+Finally, after running, the <a class="reference internal" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithm" title="pyvrp.GeneticAlgorithm.GeneticAlgorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeneticAlgorithm</span></code></a> returns a <a class="reference internal" href="#pyvrp.Result.Result" title="pyvrp.Result.Result"><code class="xref py py-class docutils literal notranslate"><span class="pre">Result</span></code></a> object.
+This object can be used to obtain the best observed solution, and detailed runtime statistics.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Have a look at the examples to see how these classes relate!</p>
+</div>
+<span class="target" id="module-pyvrp.GeneticAlgorithm"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.GeneticAlgorithm.GeneticAlgorithmParams">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GeneticAlgorithmParams</span></span><a class="headerlink" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.collect_statistics">
+<span class="sig-name descname"><span class="pre">collect_statistics</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">False</span></em><a class="headerlink" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.collect_statistics" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.intensify_on_best">
+<span class="sig-name descname"><span class="pre">intensify_on_best</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">True</span></em><a class="headerlink" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.intensify_on_best" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.intensify_probability">
+<span class="sig-name descname"><span class="pre">intensify_probability</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">0.15</span></em><a class="headerlink" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.intensify_probability" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.nb_iter_no_improvement">
+<span class="sig-name descname"><span class="pre">nb_iter_no_improvement</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">20000</span></em><a class="headerlink" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.nb_iter_no_improvement" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.repair_probability">
+<span class="sig-name descname"><span class="pre">repair_probability</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">0.8</span></em><a class="headerlink" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams.repair_probability" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.GeneticAlgorithm.GeneticAlgorithm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">GeneticAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp._ProblemData.ProblemData" title="pyvrp._ProblemData.ProblemData"><span class="pre">pyvrp._ProblemData.ProblemData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyManager" title="pyvrp._PenaltyManager.PenaltyManager"><span class="pre">pyvrp._PenaltyManager.PenaltyManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp._XorShift128.XorShift128" title="pyvrp._XorShift128.XorShift128"><span class="pre">pyvrp._XorShift128.XorShift128</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">population</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp.Population.Population" title="pyvrp.Population.Population"><span class="pre">pyvrp.Population.Population</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">local_search</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="educate.html#pyvrp.educate.LocalSearch.LocalSearch" title="pyvrp.educate.LocalSearch.LocalSearch"><span class="pre">pyvrp.educate.LocalSearch.LocalSearch</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">crossover_op</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CrossoverOperator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithmParams" title="pyvrp.GeneticAlgorithm.GeneticAlgorithmParams"><span class="pre">GeneticAlgorithmParams</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">GeneticAlgorithmParams()</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithm" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.GeneticAlgorithm.GeneticAlgorithm.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pyvrp.stop.StoppingCriterion</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.GeneticAlgorithm.GeneticAlgorithm.run" title="Permalink to this definition"></a></dt>
+<dd><p>Runs the genetic algorithm with the provided stopping criterion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>stop</strong></dt><dd><p>Stopping criterion to use. The algorithm runs until the first time
+the stopping criterion returns <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Result</span></code></dt><dd><p>A Result object, containing statistics and the best found solution.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pyvrp._Individual"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp._Individual.Individual">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Individual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp._ProblemData.ProblemData" title="pyvrp._ProblemData.ProblemData"><span class="pre">pyvrp._ProblemData.ProblemData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty_manager</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyManager" title="pyvrp._PenaltyManager.PenaltyManager"><span class="pre">pyvrp._PenaltyManager.PenaltyManager</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp._XorShift128.XorShift128" title="pyvrp._XorShift128.XorShift128"><span class="pre">pyvrp._XorShift128.XorShift128</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._Individual.Individual" title="Permalink to this definition"></a></dt>
+<dd><p>The Individual class encodes VRP solutions.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._Individual.Individual.cost">
+<span class="sig-name descname"><span class="pre">cost</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._Individual.Individual.cost" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the current cost of the individual’s solution.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These costs depend on the current penalty values maintained by the
+<a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyManager" title="pyvrp._PenaltyManager.PenaltyManager"><code class="xref py py-class docutils literal notranslate"><span class="pre">PenaltyManager</span></code></a> used to construct the
+individual.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>The current cost of this individual.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._Individual.Individual.get_neighbours">
+<span class="sig-name descname"><span class="pre">get_neighbours</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._Individual.Individual.get_neighbours" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of neighbours for each client, by index. Also includes
+the depot at index 0, which only neighbours itself.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a></dt><dd><p>A list of <code class="docutils literal notranslate"><span class="pre">(pred,</span> <span class="pre">succ)</span></code> tuples that encode for each client their
+predecessor and successors in this individual’s routes.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._Individual.Individual.get_routes">
+<span class="sig-name descname"><span class="pre">get_routes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._Individual.Individual.get_routes" title="Permalink to this definition"></a></dt>
+<dd><p>The solution this individual encodes, as a list of routes.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This list is of length
+<a class="reference internal" href="#pyvrp._ProblemData.ProblemData.num_vehicles" title="pyvrp._ProblemData.ProblemData.num_vehicles"><code class="xref py py-attr docutils literal notranslate"><span class="pre">num_vehicles</span></code></a>, but there
+could be a number of empty routes. These empty routes are all in the
+higher indices (guarantee). Use <a class="reference internal" href="#pyvrp._Individual.Individual.num_routes" title="pyvrp._Individual.Individual.num_routes"><code class="xref py py-meth docutils literal notranslate"><span class="pre">num_routes()</span></code></a> to determine
+which of the lower indices contain non-empty routes.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a></dt><dd><p>A list of routes, where each route is a list of client numbers. The
+routes each start and end at the depot (0), but that is implicit:
+the depot is not part of the returned routes.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._Individual.Individual.has_excess_capacity">
+<span class="sig-name descname"><span class="pre">has_excess_capacity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._Individual.Individual.has_excess_capacity" title="Permalink to this definition"></a></dt>
+<dd><p>Returns whether this individual violates capacity constraints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.11)"><span class="xref std std-ref">bool</span></a></dt><dd><p>True if the individual is not capacity feasible, False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._Individual.Individual.has_time_warp">
+<span class="sig-name descname"><span class="pre">has_time_warp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._Individual.Individual.has_time_warp" title="Permalink to this definition"></a></dt>
+<dd><p>Returns whether this individual violates time window constraints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.11)"><span class="xref std std-ref">bool</span></a></dt><dd><p>True if the individual is not time window feasible, False
+otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._Individual.Individual.is_feasible">
+<span class="sig-name descname"><span class="pre">is_feasible</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._Individual.Individual.is_feasible" title="Permalink to this definition"></a></dt>
+<dd><p>Whether this individual is feasible. This is a shorthand for checking
+<a class="reference internal" href="#pyvrp._Individual.Individual.has_excess_capacity" title="pyvrp._Individual.Individual.has_excess_capacity"><code class="xref py py-meth docutils literal notranslate"><span class="pre">has_excess_capacity()</span></code></a> and <a class="reference internal" href="#pyvrp._Individual.Individual.has_time_warp" title="pyvrp._Individual.Individual.has_time_warp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">has_time_warp()</span></code></a> both return
+false.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.11)"><span class="xref std std-ref">bool</span></a></dt><dd><p>Whether the solution of this individual is feasible with respect to
+capacity and time window constraints.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._Individual.Individual.num_routes">
+<span class="sig-name descname"><span class="pre">num_routes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._Individual.Individual.num_routes" title="Permalink to this definition"></a></dt>
+<dd><p>Number of non-empty routes in this solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>Number of non-empty routes.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pyvrp._PenaltyManager"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyParams">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PenaltyParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_capacity_penalty</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_time_warp_penalty</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repair_booster</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_registrations_between_penalty_updates</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty_increase</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">penalty_decrease</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_feasible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyParams" title="Permalink to this definition"></a></dt>
+<dd><p>The penalty manager parameters. These parameters control how the penalties
+are updated throughout the search. See the property descriptions for an
+explanation of the arguments.</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyParams.init_capacity_penalty">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">init_capacity_penalty</span></span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyParams.init_capacity_penalty" title="Permalink to this definition"></a></dt>
+<dd><p>Initial penalty on excess capacity. This is the amount by which one
+unit of excess load capacity is penalised in the objective, at the
+start of the search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>Initial capacity penalty.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyParams.init_time_warp_penalty">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">init_time_warp_penalty</span></span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyParams.init_time_warp_penalty" title="Permalink to this definition"></a></dt>
+<dd><p>Initial penalty on time warp. This is the amount by which one unit of
+time warp (time window violations) is penalised in the objective, at
+the start of the search.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>Initial time warp penalty.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyParams.num_registrations_between_penalty_updates">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_registrations_between_penalty_updates</span></span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyParams.num_registrations_between_penalty_updates" title="Permalink to this definition"></a></dt>
+<dd><p>Number of feasibility registrations between penalty value updates. The
+penalty manager updates the penalty terms every once in a while based
+on recent feasibility registrations. This parameter controls how often
+such updating occurs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>Number of feasibility registrations between penalty updates.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyParams.penalty_decrease">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">penalty_decrease</span></span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyParams.penalty_decrease" title="Permalink to this definition"></a></dt>
+<dd><p>Amount <span class="math notranslate nohighlight">\(p_d \in [0, 1]\)</span> by which the current penalties are
+decreased when sufficient feasible solutions (see
+<a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams.target_feasible" title="pyvrp._PenaltyManager.PenaltyParams.target_feasible"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target_feasible</span></code></a>) have been found amongst the most recent
+registrations. The penalty values <span class="math notranslate nohighlight">\(v\)</span> are updated as
+<span class="math notranslate nohighlight">\(v \gets p_d v\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></dt><dd><p>Penalty decrease parameter <span class="math notranslate nohighlight">\(p_d\)</span>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyParams.penalty_increase">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">penalty_increase</span></span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyParams.penalty_increase" title="Permalink to this definition"></a></dt>
+<dd><p>Amount <span class="math notranslate nohighlight">\(p_i \ge 1\)</span> by which the current penalties are
+increased when insufficient feasible solutions (see
+<a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams.target_feasible" title="pyvrp._PenaltyManager.PenaltyParams.target_feasible"><code class="xref py py-attr docutils literal notranslate"><span class="pre">target_feasible</span></code></a>) have been found amongst the most recent
+registrations. The penalty values <span class="math notranslate nohighlight">\(v\)</span> are updated as
+<span class="math notranslate nohighlight">\(v \gets p_i v\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></dt><dd><p>Penalty increase parameter <span class="math notranslate nohighlight">\(p_i\)</span>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyParams.repair_booster">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">repair_booster</span></span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyParams.repair_booster" title="Permalink to this definition"></a></dt>
+<dd><p>A repair booster value <span class="math notranslate nohighlight">\(r \ge 1\)</span>. This value is used to
+temporarily multiply the current penalty terms, to force feasibility.
+See also
+<a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyManager.get_penalty_booster" title="pyvrp._PenaltyManager.PenaltyManager.get_penalty_booster"><code class="xref py py-meth docutils literal notranslate"><span class="pre">get_penalty_booster()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>The repair booster value <span class="math notranslate nohighlight">\(r\)</span>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyParams.target_feasible">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">target_feasible</span></span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyParams.target_feasible" title="Permalink to this definition"></a></dt>
+<dd><p>Target percentage <span class="math notranslate nohighlight">\(p_f \in [0, 1]\)</span> of feasible registrations
+in the last <a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams.num_registrations_between_penalty_updates" title="pyvrp._PenaltyManager.PenaltyParams.num_registrations_between_penalty_updates"><code class="xref py py-attr docutils literal notranslate"><span class="pre">num_registrations_between_penalty_updates</span></code></a>
+registrations. This percentage is used to update the penalty terms:
+when insufficient feasible solutions have been registered, the
+penalties are increased; similarly, when too many feasible solutions
+have been registered, the penalty terms are decreased. This ensures a
+balanced population, with a fraction <span class="math notranslate nohighlight">\(p_f\)</span> feasible and a fraction
+<span class="math notranslate nohighlight">\(1 - p_f\)</span> infeasible solutions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></dt><dd><p>Target percentage of feasible solutions in the population
+<span class="math notranslate nohighlight">\(p_f\)</span>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PenaltyManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">vehicle_capacity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams" title="pyvrp._PenaltyManager.PenaltyParams"><span class="pre">PenaltyParams</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyManager" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyManager.get_penalty_booster">
+<span class="sig-name descname"><span class="pre">get_penalty_booster</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyManager.get_penalty_booster" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a penalty booster context manager. When entered, the penalty
+booster increases the penalties of this penalty manager until the
+context manager is exited again. See
+<a class="reference internal" href="#pyvrp._PenaltyManager.PenaltyParams.repair_booster" title="pyvrp._PenaltyManager.PenaltyParams.repair_booster"><code class="xref py py-attr docutils literal notranslate"><span class="pre">repair_booster</span></code></a> for the
+amount by which the penalty terms are increased.</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pm</span> <span class="o">=</span> <span class="n">PenaltyManager</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">with</span> <span class="n">pm</span><span class="o">.</span><span class="n">get_penalty_booster</span><span class="p">():</span>
+<span class="gp">&gt;&gt;&gt; </span>    <span class="o">...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyManager.load_penalty">
+<span class="sig-name descname"><span class="pre">load_penalty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyManager.load_penalty" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyManager.register_load_feasible">
+<span class="sig-name descname"><span class="pre">register_load_feasible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_load_feasible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyManager.register_load_feasible" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyManager.register_time_feasible">
+<span class="sig-name descname"><span class="pre">register_time_feasible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">is_time_feasible</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyManager.register_time_feasible" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._PenaltyManager.PenaltyManager.tw_penalty">
+<span class="sig-name descname"><span class="pre">tw_penalty</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_warp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._PenaltyManager.PenaltyManager.tw_penalty" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pyvrp.Population"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.Population.PopulationParams">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">PopulationParams</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">min_pop_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generation_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_elite</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_close</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lb_diversity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ub_diversity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.Population.PopulationParams" title="Permalink to this definition"></a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp.Population.PopulationParams.generation_size">
+<span class="sig-name descname"><span class="pre">generation_size</span></span><a class="headerlink" href="#pyvrp.Population.PopulationParams.generation_size" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp.Population.PopulationParams.lb_diversity">
+<span class="sig-name descname"><span class="pre">lb_diversity</span></span><a class="headerlink" href="#pyvrp.Population.PopulationParams.lb_diversity" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyvrp.Population.PopulationParams.max_pop_size">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max_pop_size</span></span><a class="headerlink" href="#pyvrp.Population.PopulationParams.max_pop_size" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp.Population.PopulationParams.min_pop_size">
+<span class="sig-name descname"><span class="pre">min_pop_size</span></span><a class="headerlink" href="#pyvrp.Population.PopulationParams.min_pop_size" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp.Population.PopulationParams.nb_close">
+<span class="sig-name descname"><span class="pre">nb_close</span></span><a class="headerlink" href="#pyvrp.Population.PopulationParams.nb_close" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp.Population.PopulationParams.nb_elite">
+<span class="sig-name descname"><span class="pre">nb_elite</span></span><a class="headerlink" href="#pyvrp.Population.PopulationParams.nb_elite" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp.Population.PopulationParams.ub_diversity">
+<span class="sig-name descname"><span class="pre">ub_diversity</span></span><a class="headerlink" href="#pyvrp.Population.PopulationParams.ub_diversity" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.Population.Population">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Population</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">data:</span> <span class="pre">~pyvrp._ProblemData.ProblemData,</span> <span class="pre">penalty_manager:</span> <span class="pre">~pyvrp._PenaltyManager.PenaltyManager,</span> <span class="pre">rng:</span> <span class="pre">~pyvrp._XorShift128.XorShift128,</span> <span class="pre">diversity_op:</span> <span class="pre">~typing.Callable[[~pyvrp._Individual.Individual,</span> <span class="pre">~pyvrp._Individual.Individual],</span> <span class="pre">float],</span> <span class="pre">params:</span> <span class="pre">~pyvrp._SubPopulation.PopulationParams</span> <span class="pre">=</span> <span class="pre">&lt;pyvrp._SubPopulation.PopulationParams</span> <span class="pre">object&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.Population.Population" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a Population instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong></dt><dd><p>Data object describing the problem to be solved.</p>
+</dd>
+<dt><strong>penalty_manager</strong></dt><dd><p>Penalty manager to use.</p>
+</dd>
+<dt><strong>rng</strong></dt><dd><p>Random number generator.</p>
+</dd>
+<dt><strong>diversity_op</strong></dt><dd><p>Operator to use to determine pairwise diversity between solutions. Have
+a look at <a class="reference internal" href="diversity.html#module-pyvrp.diversity" title="pyvrp.diversity: Diversity measures"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyvrp.diversity</span></code></a> for available operators.</p>
+</dd>
+<dt><strong>params, optional</strong></dt><dd><p>Population parameters. If not provided, a default will be used.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvrp.Population.Population.add" title="pyvrp.Population.Population.add"><code class="xref py py-obj docutils literal notranslate"><span class="pre">add</span></code></a>(individual)</p></td>
+<td><p>Adds the given individual to the population.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvrp.Population.Population.get_binary_tournament" title="pyvrp.Population.Population.get_binary_tournament"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_binary_tournament</span></code></a>()</p></td>
+<td><p>Selects an individual from this population by binary tournament.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvrp.Population.Population.num_feasible" title="pyvrp.Population.Population.num_feasible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_feasible</span></code></a>()</p></td>
+<td><p>Returns the number of feasible individuals in the population.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvrp.Population.Population.num_infeasible" title="pyvrp.Population.Population.num_infeasible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">num_infeasible</span></code></a>()</p></td>
+<td><p>Returns the number of infeasible individuals in the population.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvrp.Population.Population.restart" title="pyvrp.Population.Population.restart"><code class="xref py py-obj docutils literal notranslate"><span class="pre">restart</span></code></a>()</p></td>
+<td><p>Restarts the population.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvrp.Population.Population.select" title="pyvrp.Population.Population.select"><code class="xref py py-obj docutils literal notranslate"><span class="pre">select</span></code></a>()</p></td>
+<td><p>Selects two (if possible non-identical) parents by binary tournament, subject to a diversity restriction.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Population.Population.__iter__">
+<span class="sig-name descname"><span class="pre">__iter__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Generator" title="(in Python v3.11)"><span class="pre">Generator</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyvrp.Population.Population.__iter__" title="Permalink to this definition"></a></dt>
+<dd><p>Iterates over the individuals contained in this population.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/glossary.html#term-iterable" title="(in Python v3.11)"><span>iterable</span></a></dt><dd><p>An iterable object of individuals.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Population.Population.__len__">
+<span class="sig-name descname"><span class="pre">__len__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#pyvrp.Population.Population.__len__" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the current population size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>Population size.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Population.Population.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">individual</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.Population.Population.add" title="Permalink to this definition"></a></dt>
+<dd><p>Adds the given individual to the population. Survivor selection is
+automatically triggered when the population reaches its maximum size.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>individual</strong></dt><dd><p>Individual to add to the population.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Population.Population.get_binary_tournament">
+<span class="sig-name descname"><span class="pre">get_binary_tournament</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a></span></span><a class="headerlink" href="#pyvrp.Population.Population.get_binary_tournament" title="Permalink to this definition"></a></dt>
+<dd><p>Selects an individual from this population by binary tournament.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Individual</span></code></dt><dd><p>The selected individual.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Population.Population.num_feasible">
+<span class="sig-name descname"><span class="pre">num_feasible</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#pyvrp.Population.Population.num_feasible" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the number of feasible individuals in the population.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>Number of feasible individuals.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Population.Population.num_infeasible">
+<span class="sig-name descname"><span class="pre">num_infeasible</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></span><a class="headerlink" href="#pyvrp.Population.Population.num_infeasible" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the number of infeasible individuals in the population.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>Number of infeasible individuals.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Population.Population.restart">
+<span class="sig-name descname"><span class="pre">restart</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.Population.Population.restart" title="Permalink to this definition"></a></dt>
+<dd><p>Restarts the population. All individuals are removed and a new initial
+population population is generated.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Population.Population.select">
+<span class="sig-name descname"><span class="pre">select</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyvrp.Population.Population.select" title="Permalink to this definition"></a></dt>
+<dd><p>Selects two (if possible non-identical) parents by binary tournament,
+subject to a diversity restriction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">tuple</span></code></a></dt><dd><p>A pair of individuals (parents).</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pyvrp._ProblemData"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.Client">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Client</span></span><a class="headerlink" href="#pyvrp._ProblemData.Client" title="Permalink to this definition"></a></dt>
+<dd><p>Simple data object storing all client data as properties.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Attributes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>demand</strong></dt><dd><p>The amount this client’s demanding.</p>
+</dd>
+<dt><strong>service_duration</strong></dt><dd><p>This client’s service duration, that is, the amount of time we need to
+visit the client for.</p>
+</dd>
+<dt><strong>tw_early</strong></dt><dd><p>Earliest time at which we can visit this client.</p>
+</dd>
+<dt><strong>tw_late</strong></dt><dd><p>Latest time at which we can visit this client.</p>
+</dd>
+<dt><strong>x</strong></dt><dd><p>Horizontal coordinate of this client, that is, the ‘x’ part of the
+client’s (x, y) location tuple.</p>
+</dd>
+<dt><strong>y</strong></dt><dd><p>Vertical coordinate of this client, that is, the ‘y’ part of the
+client’s (x, y) location tuple.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.Client.demand">
+<span class="sig-name descname"><span class="pre">demand</span></span><a class="headerlink" href="#pyvrp._ProblemData.Client.demand" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.Client.service_duration">
+<span class="sig-name descname"><span class="pre">service_duration</span></span><a class="headerlink" href="#pyvrp._ProblemData.Client.service_duration" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.Client.tw_early">
+<span class="sig-name descname"><span class="pre">tw_early</span></span><a class="headerlink" href="#pyvrp._ProblemData.Client.tw_early" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.Client.tw_late">
+<span class="sig-name descname"><span class="pre">tw_late</span></span><a class="headerlink" href="#pyvrp._ProblemData.Client.tw_late" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.Client.x">
+<span class="sig-name descname"><span class="pre">x</span></span><a class="headerlink" href="#pyvrp._ProblemData.Client.x" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.Client.y">
+<span class="sig-name descname"><span class="pre">y</span></span><a class="headerlink" href="#pyvrp._ProblemData.Client.y" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.ProblemData">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ProblemData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">demands</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nb_vehicles</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">vehicle_cap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">time_windows</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">service_durations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">duration_matrix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._ProblemData.ProblemData" title="Permalink to this definition"></a></dt>
+<dd><p>Creates a problem data instance. This instance contains all information
+needed to solve the vehicle routing problem.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>coords</strong></dt><dd><p>Array of (x, y) coordinates. The first coordinate at index 0 is assumed
+to be the depot.</p>
+</dd>
+<dt><strong>demands</strong></dt><dd><p>Array of client demands. The demand at index 0 is assumed to be the
+depot’s demand, and should be zero.</p>
+</dd>
+<dt><strong>nb_vehicles</strong></dt><dd><p>The number of vehicles in this problem instance.</p>
+</dd>
+<dt><strong>vehicle_cap</strong></dt><dd><p>Homogenous vehicle capacity for all vehicles in the problem instance.</p>
+</dd>
+<dt><strong>time_windows</strong></dt><dd><p>Array of (early, late) time windows. The time window at index 0 is
+assumed to be the depot’s time window, and describes the overall time
+horizon.</p>
+</dd>
+<dt><strong>service_durations</strong></dt><dd><p>Array of service durations, that is, the length of time needed to
+service a customer upon visiting. The service duration at index 0 is
+assumed to be the depot’s service time, and should be zero.</p>
+</dd>
+<dt><strong>duration_matrix</strong></dt><dd><p>A matrix that gives the travel times between clients (and the depot at
+index 0). Does not have to be symmetric.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>All array data assume that the data at or involving index 0 relates to the
+depot, and all other indices specify client information.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.ProblemData.client">
+<span class="sig-name descname"><span class="pre">client</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._ProblemData.ProblemData.client" title="Permalink to this definition"></a></dt>
+<dd><p>Returns client data for the given client.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>client</strong></dt><dd><p>Client number whose information to retrieve.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference internal" href="#pyvrp._ProblemData.Client" title="pyvrp._ProblemData.Client"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Client</span></code></a></dt><dd><p>A simple data object containing the requested client’s information.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.ProblemData.depot">
+<span class="sig-name descname"><span class="pre">depot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._ProblemData.ProblemData.depot" title="Permalink to this definition"></a></dt>
+<dd><p>Returns ‘client’ information for the depot, which is stored internally
+as the client with number <cite>0</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference internal" href="#pyvrp._ProblemData.Client" title="pyvrp._ProblemData.Client"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Client</span></code></a></dt><dd><p>A simple data object containing the depot’s information.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.ProblemData.dist">
+<span class="sig-name descname"><span class="pre">dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">second</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._ProblemData.ProblemData.dist" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the travel duration between the first and second argument,
+according to this instance’s travel duration matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>first</strong></dt><dd><p>Client or depot number.</p>
+</dd>
+<dt><strong>second</strong></dt><dd><p>Client or depot number.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>Travel duration between the given clients.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.ProblemData.distance_matrix">
+<span class="sig-name descname"><span class="pre">distance_matrix</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._ProblemData.ProblemData.distance_matrix" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the travel duration matrix used for distance/duration
+computations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">Any</span></code></dt><dd><p>Travel duration matrix.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.ProblemData.num_clients">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_clients</span></span><a class="headerlink" href="#pyvrp._ProblemData.ProblemData.num_clients" title="Permalink to this definition"></a></dt>
+<dd><p>Number of clients in this problem instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>Number of clients in the instance.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.ProblemData.num_vehicles">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_vehicles</span></span><a class="headerlink" href="#pyvrp._ProblemData.ProblemData.num_vehicles" title="Permalink to this definition"></a></dt>
+<dd><p>Number of vehicles in this problem instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>Number of vehicles in the instance.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pyvrp._ProblemData.ProblemData.vehicle_capacity">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">vehicle_capacity</span></span><a class="headerlink" href="#pyvrp._ProblemData.ProblemData.vehicle_capacity" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the homogenous vehicle capacities of all vehicles in this
+problem data instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">int</span></code></a></dt><dd><p>Capacity of each vehicle in the instance.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pyvrp.read"></span><dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.read.read">
+<span class="sig-name descname"><span class="pre">read</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">where:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">~pathlib.Path,</span> <span class="pre">instance_format:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'vrplib',</span> <span class="pre">round_func:</span> <span class="pre">str</span> <span class="pre">|</span> <span class="pre">~typing.Callable[[~numpy.ndarray],</span> <span class="pre">~numpy.ndarray]</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">no_rounding&gt;</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#pyvrp._ProblemData.ProblemData" title="pyvrp._ProblemData.ProblemData"><span class="pre">ProblemData</span></a></span></span><a class="headerlink" href="#pyvrp.read.read" title="Permalink to this definition"></a></dt>
+<dd><p>Reads the VRPLIB file at the given location, and returns a ProblemData
+instance.</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>where</strong></dt><dd><p>File location to read. Assumes the data on the given location is in
+VRPLIB format.</p>
+</dd>
+<dt><strong>instance_format, optional</strong></dt><dd><p>File format of the instance to read, one of <code class="docutils literal notranslate"><span class="pre">'vrplib'</span></code> (default) or
+<code class="docutils literal notranslate"><span class="pre">'solomon'</span></code>.</p>
+</dd>
+<dt><strong>round_func, optional</strong></dt><dd><p>Optional rounding function. Will be applied to round data if the data
+is not already integer. This can either be a function or a string:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'round'</span></code> rounds the values to the nearest integer;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'trunc'</span></code> truncates the values to be integral;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'trunc1'</span></code> or <code class="docutils literal notranslate"><span class="pre">'dimacs'</span></code> scale and truncate to the nearest
+decimal;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'none'</span></code> does no rounding. This is the default.</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">ProblemData</span></code></dt><dd><p>Data instance constructed from the read data.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.read.read_solution">
+<span class="sig-name descname"><span class="pre">read_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><span class="pre">Path</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#pyvrp.read.read_solution" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a solution in VRPLIB format from file at the given location, and
+returns the routes contained in it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>where</strong></dt><dd><p>File location to read. Assumes the solution in the file on the given
+location is in VRPLIB solution format.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">list</span></code></a></dt><dd><p>List of routes, where each route is a list of client numbers.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.Result"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.Result.Result">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">best</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">stats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp.Statistics.Statistics" title="pyvrp.Statistics.Statistics"><span class="pre">Statistics</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">runtime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.Result.Result" title="Permalink to this definition"></a></dt>
+<dd><p>Stores the outcomes of a single run. An instance of this class is returned
+once the GeneticAlgorithm completes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>best</strong></dt><dd><p>The best observed solution.</p>
+</dd>
+<dt><strong>stats</strong></dt><dd><p>A Statistics object containing runtime statistics. These are only
+collected and available if statistics were collected for the given run.</p>
+</dd>
+<dt><strong>num_iterations</strong></dt><dd><p>Number of iterations performed by the genetic algorithm.</p>
+</dd>
+<dt><strong>runtime</strong></dt><dd><p>Total runtime of the main genetic algorithm loop.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.11)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValueError</span></code></a></dt><dd><p>When the number of iterations or runtime are negative.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvrp.Result.Result.cost" title="pyvrp.Result.Result.cost"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cost</span></code></a>()</p></td>
+<td><p>Returns the cost (objective) value of the best solution.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvrp.Result.Result.has_statistics" title="pyvrp.Result.Result.has_statistics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">has_statistics</span></code></a>()</p></td>
+<td><p>Returns whether detailed statistics were collected.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvrp.Result.Result.is_feasible" title="pyvrp.Result.Result.is_feasible"><code class="xref py py-obj docutils literal notranslate"><span class="pre">is_feasible</span></code></a>()</p></td>
+<td><p>Returns whether the best solution is feasible.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Result.Result.cost">
+<span class="sig-name descname"><span class="pre">cost</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></span><a class="headerlink" href="#pyvrp.Result.Result.cost" title="Permalink to this definition"></a></dt>
+<dd><p>Returns the cost (objective) value of the best solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><code class="docutils literal notranslate"><span class="pre">float</span></code></a></dt><dd><p>Objective value.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Result.Result.has_statistics">
+<span class="sig-name descname"><span class="pre">has_statistics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#pyvrp.Result.Result.has_statistics" title="Permalink to this definition"></a></dt>
+<dd><p>Returns whether detailed statistics were collected. If statistics are
+not availabe, the plotting methods cannot be used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.11)"><span class="xref std std-ref">bool</span></a></dt><dd><p>True when detailed statistics are available, False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Result.Result.is_feasible">
+<span class="sig-name descname"><span class="pre">is_feasible</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span></span><a class="headerlink" href="#pyvrp.Result.Result.is_feasible" title="Permalink to this definition"></a></dt>
+<dd><p>Returns whether the best solution is feasible.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bltin-boolean-values" title="(in Python v3.11)"><span class="xref std std-ref">bool</span></a></dt><dd><p>True when the solution is feasible, False otherwise.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pyvrp.show_versions"></span><dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.show_versions.show_versions">
+<span class="sig-name descname"><span class="pre">show_versions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.show_versions.show_versions" title="Permalink to this definition"></a></dt>
+<dd><p>This function prints version information that is useful when filing bug
+reports.</p>
+<p class="rubric">Examples</p>
+<p>Calling this function should print information like the following
+(dependency versions in your local installation will likely differ):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyvrp</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pyvrp</span><span class="o">.</span><span class="n">show_versions</span><span class="p">()</span>
+<span class="go">INSTALLED VERSIONS</span>
+<span class="go">------------------</span>
+<span class="go">     pyvrp: 1.0.0</span>
+<span class="go">     numpy: 1.24.2</span>
+<span class="go">matplotlib: 3.7.0</span>
+<span class="go">    vrplib: 1.0.1</span>
+<span class="go">      tqdm: 4.64.1</span>
+<span class="go">     tomli: 2.0.1</span>
+<span class="go">    Python: 3.9.13</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.Statistics"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.Statistics.Statistics">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Statistics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">runtimes:</span> <span class="pre">~typing.List[float]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_iterations:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feas_stats:</span> <span class="pre">~typing.List[~pyvrp.Statistics._Datum]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">infeas_stats:</span> <span class="pre">~typing.List[~pyvrp.Statistics._Datum]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.Statistics.Statistics" title="Permalink to this definition"></a></dt>
+<dd><p>The Statistics object tracks various (population-level) statistics of
+genetic algorithm runs. This can be helpful in analysing the algorithm’s
+performance.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvrp.Statistics.Statistics.collect_from" title="pyvrp.Statistics.Statistics.collect_from"><code class="xref py py-obj docutils literal notranslate"><span class="pre">collect_from</span></code></a>(population)</p></td>
+<td><p>Collects statistics from the given population object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyvrp.Statistics.Statistics.from_csv" title="pyvrp.Statistics.Statistics.from_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">from_csv</span></code></a>(where[, delimiter])</p></td>
+<td><p>Reads a Statistics object from the CSV file at the given filesystem location.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyvrp.Statistics.Statistics.to_csv" title="pyvrp.Statistics.Statistics.to_csv"><code class="xref py py-obj docutils literal notranslate"><span class="pre">to_csv</span></code></a>(where[, delimiter, quoting])</p></td>
+<td><p>Writes this Statistics object to the given location, as a CSV file.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Statistics.Statistics.collect_from">
+<span class="sig-name descname"><span class="pre">collect_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">population</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#pyvrp.Population.Population" title="pyvrp.Population.Population"><span class="pre">Population</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.Statistics.Statistics.collect_from" title="Permalink to this definition"></a></dt>
+<dd><p>Collects statistics from the given population object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>population</strong></dt><dd><p>Population instance to collect statistics from.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Statistics.Statistics.from_csv">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><span class="pre">Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">','</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.Statistics.Statistics.from_csv" title="Permalink to this definition"></a></dt>
+<dd><p>Reads a Statistics object from the CSV file at the given filesystem
+location.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>where</strong></dt><dd><p>Filesystem location to read from.</p>
+</dd>
+<dt><strong>delimiter</strong></dt><dd><p>Value separator. Default comma.</p>
+</dd>
+<dt><strong>kwargs</strong></dt><dd><p>Additional keyword arguments. These are passed to
+<a class="reference external" href="https://docs.python.org/3/library/csv.html#csv.DictReader" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csv.DictReader</span></code></a>.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><a class="reference internal" href="#pyvrp.Statistics.Statistics" title="pyvrp.Statistics.Statistics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Statistics</span></code></a></dt><dd><p>Statistics object populated with the data read from the given
+filesystem location.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp.Statistics.Statistics.to_csv">
+<span class="sig-name descname"><span class="pre">to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">where</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.11)"><span class="pre">Path</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">delimiter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">','</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quoting</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.Statistics.Statistics.to_csv" title="Permalink to this definition"></a></dt>
+<dd><p>Writes this Statistics object to the given location, as a CSV file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>where</strong></dt><dd><p>Filesystem location to write to.</p>
+</dd>
+<dt><strong>delimiter</strong></dt><dd><p>Value separator. Default comma.</p>
+</dd>
+<dt><strong>quoting</strong></dt><dd><p>Quoting strategy. Default only quotes values when necessary.</p>
+</dd>
+<dt><strong>kwargs</strong></dt><dd><p>Additional keyword arguments. These are passed to
+<a class="reference external" href="https://docs.python.org/3/library/csv.html#csv.DictWriter" title="(in Python v3.11)"><code class="xref py py-class docutils literal notranslate"><span class="pre">csv.DictWriter</span></code></a>.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-pyvrp._XorShift128"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp._XorShift128.XorShift128">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">XorShift128</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._XorShift128.XorShift128" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._XorShift128.XorShift128.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._XorShift128.XorShift128.__call__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._XorShift128.XorShift128.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._XorShift128.XorShift128.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._XorShift128.XorShift128.max">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">max</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._XorShift128.XorShift128.max" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._XorShift128.XorShift128.min">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">min</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._XorShift128.XorShift128.min" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._XorShift128.XorShift128.rand">
+<span class="sig-name descname"><span class="pre">rand</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._XorShift128.XorShift128.rand" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyvrp._XorShift128.XorShift128.randint">
+<span class="sig-name descname"><span class="pre">randint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">high</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp._XorShift128.XorShift128.randint" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../examples/cvrp.html" class="btn btn-neutral float-left" title="Capacitated Vehicle Routing Problem" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="crossover.html" class="btn btn-neutral float-right" title="Crossover operators" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - 2023, PyVRP contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

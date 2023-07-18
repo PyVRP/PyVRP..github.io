@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation instructions &mdash; PyVRP 0.2.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Getting help" href="getting_help.html" />
+    <link rel="prev" title="A brief introduction to HGS for VRP" href="introduction_to_hgs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PyVRP
+          </a>
+              <div class="version">
+                0.2.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction_to_hgs.html">A brief introduction to HGS for VRP</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-from-source">Installing from source</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-examples-locally">Running the examples locally</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="benchmarks.html">Benchmarks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/vrptw.html">Vehicle Routing Problem with Time Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/cvrp.html">Capacitated Vehicle Routing Problem</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/pyvrp.html">PyVRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/crossover.html">Crossover operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/diagnostics.html">Diagnostic results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/diversity.html">Diversity measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/educate.html">Education</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/plotting.html">Plotting tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/stop.html">Stopping criteria</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developing PyVRP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/benchmarking.html">Benchmarking</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVRP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Installation instructions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/setup/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation-instructions">
+<h1>Installation instructions<a class="headerlink" href="#installation-instructions" title="Permalink to this heading"></a></h1>
+<p>The most straightforward way to use the <code class="docutils literal notranslate"><span class="pre">pyvrp</span></code> package in your project is to install via <em>pip</em>, like so:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pyvrp
+</pre></div>
+</div>
+<section id="installing-from-source">
+<h2>Installing from source<a class="headerlink" href="#installing-from-source" title="Permalink to this heading"></a></h2>
+<p>To install the latest version of <code class="docutils literal notranslate"><span class="pre">pyvrp</span></code> directly from the GitHub repository, you can use <em>pip</em>, like so:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;pyvrp @ git+https://github.com/PyVRP/PyVRP&#39;</span>
+</pre></div>
+</div>
+<p>This can be useful to get updates that have not yet made it to the Python package index.</p>
+</section>
+<section id="running-the-examples-locally">
+<span id="running-locally"></span><h2>Running the examples locally<a class="headerlink" href="#running-the-examples-locally" title="Permalink to this heading"></a></h2>
+<p>To run the example notebooks locally, first clone the repository:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/PyVRP/PyVRP.git
+</pre></div>
+</div>
+<p>Then, make sure your Python version has <code class="docutils literal notranslate"><span class="pre">poetry</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>poetry
+</pre></div>
+</div>
+<p>Now, go into the PyVRP repository and set-up a virtual environment.
+We want a virtual environment that also contains all dependencies needed to run the example notebooks, so we also need to install the optional <code class="docutils literal notranslate"><span class="pre">examples</span></code> dependency group.
+This goes like so:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>PyVRP
+poetry<span class="w"> </span>install<span class="w"> </span>--with<span class="w"> </span>examples
+</pre></div>
+</div>
+<p>This might take a few minutes to resolve, but only needs to be done once.
+After setting everything up, simply open the jupyter notebooks:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>poetry<span class="w"> </span>run<span class="w"> </span>jupyter<span class="w"> </span>notebook
+</pre></div>
+</div>
+<p>This will open up a page in your browser, where you can navigate to the example notebooks in the <code class="docutils literal notranslate"><span class="pre">examples/</span></code> folder!</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="introduction_to_hgs.html" class="btn btn-neutral float-left" title="A brief introduction to HGS for VRP" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="getting_help.html" class="btn btn-neutral float-right" title="Getting help" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - 2023, PyVRP contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

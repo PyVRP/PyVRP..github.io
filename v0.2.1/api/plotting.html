@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plotting tools &mdash; PyVRP 0.2.1 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Stopping criteria" href="stop.html" />
+    <link rel="prev" title="Education" href="educate.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PyVRP
+          </a>
+              <div class="version">
+                0.2.1
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/introduction_to_hgs.html">A brief introduction to HGS for VRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/installation.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/getting_help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/benchmarks.html">Benchmarks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/vrptw.html">Vehicle Routing Problem with Time Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/cvrp.html">Capacitated Vehicle Routing Problem</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="pyvrp.html">PyVRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crossover.html">Crossover operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html">Diagnostic results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diversity.html">Diversity measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="educate.html">Education</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Plotting tools</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.plotting.plot_coordinates.plot_coordinates"><code class="docutils literal notranslate"><span class="pre">plot_coordinates()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.plotting.plot_demands.plot_demands"><code class="docutils literal notranslate"><span class="pre">plot_demands()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.plotting.plot_diversity.plot_diversity"><code class="docutils literal notranslate"><span class="pre">plot_diversity()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.plotting.plot_instance.plot_instance"><code class="docutils literal notranslate"><span class="pre">plot_instance()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.plotting.plot_objectives.plot_objectives"><code class="docutils literal notranslate"><span class="pre">plot_objectives()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.plotting.plot_result.plot_result"><code class="docutils literal notranslate"><span class="pre">plot_result()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.plotting.plot_route_schedule.plot_route_schedule"><code class="docutils literal notranslate"><span class="pre">plot_route_schedule()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.plotting.plot_runtimes.plot_runtimes"><code class="docutils literal notranslate"><span class="pre">plot_runtimes()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.plotting.plot_solution.plot_solution"><code class="docutils literal notranslate"><span class="pre">plot_solution()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.plotting.plot_time_windows.plot_time_windows"><code class="docutils literal notranslate"><span class="pre">plot_time_windows()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stop.html">Stopping criteria</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developing PyVRP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/benchmarking.html">Benchmarking</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVRP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Plotting tools</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/plotting.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <span class="target" id="module-pyvrp.plotting"></span><section id="plotting-tools">
+<h1>Plotting tools<a class="headerlink" href="#plotting-tools" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="#module-pyvrp.plotting" title="pyvrp.plotting: Plotting tools"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyvrp.plotting</span></code></a> module contains various functions for plotting problem instances and solutions to those problem instances.
+These can be used to better understand your problem, and to help investigate the solutions returned by the genetic algorithm.</p>
+<span class="target" id="module-pyvrp.plotting.plot_coordinates"></span><dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.plotting.plot_coordinates.plot_coordinates">
+<span class="sig-name descname"><span class="pre">plot_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._ProblemData.ProblemData" title="pyvrp._ProblemData.ProblemData"><span class="pre">ProblemData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Coordinates'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.7.2)"><span class="pre">Axes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.plotting.plot_coordinates.plot_coordinates" title="Permalink to this definition"></a></dt>
+<dd><p>Plots coordinates for clients and depot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong></dt><dd><p>Data instance.</p>
+</dd>
+<dt><strong>title, optional</strong></dt><dd><p>Title to add to the plot.</p>
+</dd>
+<dt><strong>ax, optional</strong></dt><dd><p>Axes object to draw the plot on. One will be created if not provided.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.plotting.plot_demands"></span><dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.plotting.plot_demands.plot_demands">
+<span class="sig-name descname"><span class="pre">plot_demands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._ProblemData.ProblemData" title="pyvrp._ProblemData.ProblemData"><span class="pre">ProblemData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.7.2)"><span class="pre">Axes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.plotting.plot_demands.plot_demands" title="Permalink to this definition"></a></dt>
+<dd><p>Plots demands for clients, as vertical bars sorted by demand.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong></dt><dd><p>Data instance.</p>
+</dd>
+<dt><strong>title, optional</strong></dt><dd><p>Title to add to the plot.</p>
+</dd>
+<dt><strong>ax, optional</strong></dt><dd><p>Axes object to draw the plot on. One will be created if not provided.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.plotting.plot_diversity"></span><dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.plotting.plot_diversity.plot_diversity">
+<span class="sig-name descname"><span class="pre">plot_diversity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp.Result.Result" title="pyvrp.Result.Result"><span class="pre">Result</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.7.2)"><span class="pre">Axes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.plotting.plot_diversity.plot_diversity" title="Permalink to this definition"></a></dt>
+<dd><p>Plots population diversity statistics.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>result</strong></dt><dd><p>Result for which to plot diversity.</p>
+</dd>
+<dt><strong>ax, optional</strong></dt><dd><p>Axes object to draw the plot on. One will be created if not
+provided.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">StatisticsNotCollectedError</span></code></dt><dd><p>Raised when statistics have not been collected.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.plotting.plot_instance"></span><dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.plotting.plot_instance.plot_instance">
+<span class="sig-name descname"><span class="pre">plot_instance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._ProblemData.ProblemData" title="pyvrp._ProblemData.ProblemData"><span class="pre">ProblemData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure" title="(in Matplotlib v3.7.2)"><span class="pre">Figure</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.plotting.plot_instance.plot_instance" title="Permalink to this definition"></a></dt>
+<dd><p>Plots client coordinate, time window and demand data of the given instance.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong></dt><dd><p>Data instance.</p>
+</dd>
+<dt><strong>fig, optional</strong></dt><dd><p>Optional Figure to draw on. One will be created if not provided.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.plotting.plot_objectives"></span><dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.plotting.plot_objectives.plot_objectives">
+<span class="sig-name descname"><span class="pre">plot_objectives</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp.Result.Result" title="pyvrp.Result.Result"><span class="pre">Result</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_to_skip</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.7.2)"><span class="pre">Axes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ylim_adjust</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.11)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">(0.95,</span> <span class="pre">1.15)</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.plotting.plot_objectives.plot_objectives" title="Permalink to this definition"></a></dt>
+<dd><p>Plots each subpopulation’s objective values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>result</strong></dt><dd><p>Result for which to plot objectives.</p>
+</dd>
+<dt><strong>num_to_skip</strong></dt><dd><p>Number of initial iterations to skip when plotting. Early iterations
+often have very high objective values, and obscure what’s going on
+later in the search. The default skips the first 5% of iterations.</p>
+</dd>
+<dt><strong>ax</strong></dt><dd><p>Axes object to draw the plot on. One will be created if not provided.</p>
+</dd>
+<dt><strong>ylim_adjust</strong></dt><dd><p>Bounds the y-axis to <code class="docutils literal notranslate"><span class="pre">(best</span> <span class="pre">*</span> <span class="pre">ylim_adjust[0],</span> <span class="pre">best</span> <span class="pre">*</span> <span class="pre">ylim_adjust[1])</span></code>
+where <code class="docutils literal notranslate"><span class="pre">best</span></code> denotes the best found feasible objective value. Default
+(0.95, 1.15).</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">StatisticsNotCollectedError</span></code></dt><dd><p>Raised when statistics have not been collected.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.plotting.plot_result"></span><dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.plotting.plot_result.plot_result">
+<span class="sig-name descname"><span class="pre">plot_result</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp.Result.Result" title="pyvrp.Result.Result"><span class="pre">Result</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._ProblemData.ProblemData" title="pyvrp._ProblemData.ProblemData"><span class="pre">ProblemData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://matplotlib.org/stable/api/figure_api.html#matplotlib.figure.Figure" title="(in Matplotlib v3.7.2)"><span class="pre">Figure</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.plotting.plot_result.plot_result" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the results of a run, including the best solution and detailed
+statistics about the algorithm’s performance (if available).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>result</strong></dt><dd><p>Result to be plotted.</p>
+</dd>
+<dt><strong>data</strong></dt><dd><p>Data instance underlying the result’s solution.</p>
+</dd>
+<dt><strong>fig, optional</strong></dt><dd><p>Optional Figure to draw on. One will be created if not provided.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.plotting.plot_route_schedule"></span><dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.plotting.plot_route_schedule.plot_route_schedule">
+<span class="sig-name descname"><span class="pre">plot_route_schedule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._ProblemData.ProblemData" title="pyvrp._ProblemData.ProblemData"><span class="pre">ProblemData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">route</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.11)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">legend</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.7.2)"><span class="pre">Axes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.plotting.plot_route_schedule.plot_route_schedule" title="Permalink to this definition"></a></dt>
+<dd><p>Plots a route schedule. This function plots multiple time statistics
+as a function of distance traveled:</p>
+<ul class="simple">
+<li><p>Solid: earliest possible trajectory / time, using time warp if the route
+is infeasible.</p></li>
+<li><p>Shaded: slack up to latest possible trajectory / time, only if no time
+warp on the route.</p></li>
+<li><p>Dash-dotted: driving and service time, excluding wait time and time warp.</p></li>
+<li><p>Dotted: pure driving time.</p></li>
+<li><p>Grey shaded background: remaining load in the vehicle.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong></dt><dd><p>Data instance for which to plot the route schedule.</p>
+</dd>
+<dt><strong>route</strong></dt><dd><p>Route (list of clients) whose schedule to plot.</p>
+</dd>
+<dt><strong>legend, optional</strong></dt><dd><p>Whether or not to show the legends. Default True.</p>
+</dd>
+<dt><strong>title, optional</strong></dt><dd><p>Title to add to the plot.</p>
+</dd>
+<dt><strong>ax, optional</strong></dt><dd><p>Axes object to draw the plot on. One will be created if not provided.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.plotting.plot_runtimes"></span><dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.plotting.plot_runtimes.plot_runtimes">
+<span class="sig-name descname"><span class="pre">plot_runtimes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp.Result.Result" title="pyvrp.Result.Result"><span class="pre">Result</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.7.2)"><span class="pre">Axes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.plotting.plot_runtimes.plot_runtimes" title="Permalink to this definition"></a></dt>
+<dd><p>Plots iteration runtimes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>result</strong></dt><dd><p>Result for which to plot runtimes.</p>
+</dd>
+<dt><strong>ax, optional</strong></dt><dd><p>Axes object to draw the plot on. One will be created if not provided.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="xref py py-obj docutils literal notranslate"><span class="pre">StatisticsNotCollectedError</span></code></dt><dd><p>Raised when statistics have not been collected.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.plotting.plot_solution"></span><dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.plotting.plot_solution.plot_solution">
+<span class="sig-name descname"><span class="pre">plot_solution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">solution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._Individual.Individual" title="pyvrp._Individual.Individual"><span class="pre">Individual</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._ProblemData.ProblemData" title="pyvrp._ProblemData.ProblemData"><span class="pre">ProblemData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot_customers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.11)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.7.2)"><span class="pre">Axes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.plotting.plot_solution.plot_solution" title="Permalink to this definition"></a></dt>
+<dd><p>Plots the given solution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>solution</strong></dt><dd><p>Solution to plot.</p>
+</dd>
+<dt><strong>data</strong></dt><dd><p>Data instance underlying the solution.</p>
+</dd>
+<dt><strong>plot_customers, optional</strong></dt><dd><p>Whether to plot customers as dots. Default False, which plots only the
+solution’s routes.</p>
+</dd>
+<dt><strong>ax, optional</strong></dt><dd><p>Axes object to draw the plot on. One will be created if not provided.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.plotting.plot_time_windows"></span><dl class="py function">
+<dt class="sig sig-object py" id="pyvrp.plotting.plot_time_windows.plot_time_windows">
+<span class="sig-name descname"><span class="pre">plot_time_windows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="pyvrp.html#pyvrp._ProblemData.ProblemData" title="pyvrp._ProblemData.ProblemData"><span class="pre">ProblemData</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Time</span> <span class="pre">windows'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.html#matplotlib.axes.Axes" title="(in Matplotlib v3.7.2)"><span class="pre">Axes</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.11)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.plotting.plot_time_windows.plot_time_windows" title="Permalink to this definition"></a></dt>
+<dd><p>Plots client time windows, as vertical bars sorted by time window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>data</strong></dt><dd><p>Data instance.</p>
+</dd>
+<dt><strong>title, optional</strong></dt><dd><p>Title to add to the plot.</p>
+</dd>
+<dt><strong>ax, optional</strong></dt><dd><p>Axes object to draw the plot on. One will be created if not provided.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="educate.html" class="btn btn-neutral float-left" title="Education" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stop.html" class="btn btn-neutral float-right" title="Stopping criteria" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - 2023, PyVRP contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

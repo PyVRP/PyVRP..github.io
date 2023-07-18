@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capacitated Vehicle Routing Problem &mdash; PyVRP 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PyVRP" href="../api/pyvrp.html" />
+    <link rel="prev" title="Vehicle Routing Problem with Time Windows" href="vrptw.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PyVRP
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/introduction_to_hgs.html">A brief introduction to HGS for VRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/installation.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/getting_help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/benchmarks.html">Benchmarks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="vrptw.html">Vehicle Routing Problem with Time Windows</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Capacitated Vehicle Routing Problem</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Imports">Imports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Loading-the-instance">Loading the instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Plotting-the-instance">Plotting the instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Configuring-Hybrid-Genetic-Search">Configuring Hybrid Genetic Search</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Solving-the-instance">Solving the instance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api/pyvrp.html">PyVRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/crossover.html">Crossover operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/diagnostics.html">Diagnostic results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/diversity.html">Diversity measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/educate.html">Education</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/plotting.html">Plotting tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api/stop.html">Stopping criteria</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developing PyVRP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/benchmarking.html">Benchmarking</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVRP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Capacitated Vehicle Routing Problem</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/examples/cvrp.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Capacitated-Vehicle-Routing-Problem">
+<h1>Capacitated Vehicle Routing Problem<a class="headerlink" href="#Capacitated-Vehicle-Routing-Problem" title="Permalink to this heading"></a></h1>
+<p>This notebook shows how to use the PyVRP library to solve the Capacitated Vehicle Routing Problem (CVRP).</p>
+<p>A CVRP instance is defined on a complete graph <span class="math notranslate nohighlight">\(G=(V,A)\)</span>, where <span class="math notranslate nohighlight">\(V\)</span> is the vertex set and <span class="math notranslate nohighlight">\(A\)</span> is the arc set. The vertex set <span class="math notranslate nohighlight">\(V\)</span> is partitioned into <span class="math notranslate nohighlight">\(V=\{0\} \cup V_c\)</span>, where <span class="math notranslate nohighlight">\(0\)</span> represents the depot and <span class="math notranslate nohighlight">\(V_c=\{1, \dots, n\}\)</span> denotes the set of <span class="math notranslate nohighlight">\(n\)</span> customers. Each arc <span class="math notranslate nohighlight">\((i, j) \in A\)</span> has a weight <span class="math notranslate nohighlight">\(d_{ij} \ge 0\)</span> that represents the travel distance from <span class="math notranslate nohighlight">\(i \in V\)</span> to <span class="math notranslate nohighlight">\(j \in V\)</span>, which need not to be symmetric and/or euclidean.
+Each customer <span class="math notranslate nohighlight">\(i \in V_c\)</span> has a demand <span class="math notranslate nohighlight">\(q_{i} \ge 0\)</span>. We assume that there is an unlimited number of homogeneous vehicles available, each with maximum capacity <span class="math notranslate nohighlight">\(Q &gt; 0\)</span>.</p>
+<p>A feasible solution to the CVRP consists of a set of routes that all begin and end at the depot, such that each customer is visited exactly once and none of the vehicles exceed their capacity. The objective is to find a feasible solution that minimizes the total distance.</p>
+<p>In the following, we will configure the Hybrid Genetic Search algorithm to solve a single CVRP instance.</p>
+<section id="Imports">
+<h2>Imports<a class="headerlink" href="#Imports" title="Permalink to this heading"></a></h2>
+<p>First, we import some utilities and the solver components.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">vrplib</span>
+
+<span class="kn">from</span> <span class="nn">pyvrp</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">GeneticAlgorithm</span><span class="p">,</span>
+    <span class="n">GeneticAlgorithmParams</span><span class="p">,</span>
+    <span class="n">PenaltyManager</span><span class="p">,</span>
+    <span class="n">Population</span><span class="p">,</span>
+    <span class="n">ProblemData</span><span class="p">,</span>
+    <span class="n">XorShift128</span><span class="p">,</span>
+    <span class="n">diagnostics</span><span class="p">,</span>
+    <span class="n">plotting</span><span class="p">,</span>
+    <span class="n">read</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pyvrp.crossover</span> <span class="kn">import</span> <span class="n">selective_route_exchange</span> <span class="k">as</span> <span class="n">srex</span>
+<span class="kn">from</span> <span class="nn">pyvrp.diversity</span> <span class="kn">import</span> <span class="n">broken_pairs_distance</span> <span class="k">as</span> <span class="n">bpd</span>
+<span class="kn">from</span> <span class="nn">pyvrp.educate</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">NODE_OPERATORS</span><span class="p">,</span>
+    <span class="n">ROUTE_OPERATORS</span><span class="p">,</span>
+    <span class="n">LocalSearch</span><span class="p">,</span>
+    <span class="n">NeighbourhoodParams</span><span class="p">,</span>
+    <span class="n">compute_neighbours</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pyvrp.stop</span> <span class="kn">import</span> <span class="n">MaxIterations</span><span class="p">,</span> <span class="n">MaxRuntime</span><span class="p">,</span> <span class="n">StoppingCriterion</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Loading-the-instance">
+<h2>Loading the instance<a class="headerlink" href="#Loading-the-instance" title="Permalink to this heading"></a></h2>
+<p>In this notebook we will solve the <code class="docutils literal notranslate"><span class="pre">X-n439-k37</span></code> instance, which is part of the <a class="reference external" href="http://vrp.atd-lab.inf.puc-rio.br/index.php/en/new-instances">X instance set</a> that is widely used to benchmark CVRP algorithms. The function <code class="docutils literal notranslate"><span class="pre">pyvrp.read</span></code> reads the instance file and converts it to a <code class="docutils literal notranslate"><span class="pre">ProblemData</span></code> instance. We pass the argument <code class="docutils literal notranslate"><span class="pre">round_func='round'</span></code> to compute the Euclidean distances rounded to the nearest integral, which is the convention for the X benchmark set. We also load the best known
+solution to evaluate our solver later on.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">instance</span> <span class="o">=</span> <span class="n">read</span><span class="p">(</span><span class="s2">&quot;data/X-n439-k37.vrp&quot;</span><span class="p">,</span> <span class="n">round_func</span><span class="o">=</span><span class="s2">&quot;round&quot;</span><span class="p">)</span>
+<span class="n">instance_bks</span> <span class="o">=</span> <span class="n">vrplib</span><span class="o">.</span><span class="n">read_solution</span><span class="p">(</span><span class="s2">&quot;data/X-n439-k37.sol&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>By default, PyVRP is built to solve routing problems that include time windows. Since CVRP does not include time window data, the <code class="docutils literal notranslate"><span class="pre">pyvrp.read</span></code> uses placeholder values for customer time windows:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">instance</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">tw_late</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+556652
+</pre></div></div>
+</div>
+<p>This value is computed by taking the maximum route duration (number of clients <span class="math notranslate nohighlight">\(\times\)</span> (maximum arc distance + maximum service time)). As a result, the time window constraints are always feasible and we can solve an instance of CVRP using a VRPTW solver.</p>
+</section>
+<section id="Plotting-the-instance">
+<h2>Plotting the instance<a class="headerlink" href="#Plotting-the-instance" title="Permalink to this heading"></a></h2>
+<p>Let’s plot the instance and see what we have. The function <code class="docutils literal notranslate"><span class="pre">plotting.plot_demands</span></code> will plot the demands of the instance: in this case, all customers have 1 demand. <code class="docutils literal notranslate"><span class="pre">plotting.plot_coordinates</span></code> plots the customer coordinates of the instance.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width_ratios</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span> <span class="o">/</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span> <span class="o">/</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">plotting</span><span class="o">.</span><span class="n">plot_demands</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span>
+<span class="n">plotting</span><span class="o">.</span><span class="n">plot_coordinates</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_cvrp_10_0.png" src="../_images/examples_cvrp_10_0.png" />
+</div>
+</div>
+</section>
+<section id="Configuring-Hybrid-Genetic-Search">
+<h2>Configuring Hybrid Genetic Search<a class="headerlink" href="#Configuring-Hybrid-Genetic-Search" title="Permalink to this heading"></a></h2>
+<p>The next step is to implement a <code class="docutils literal notranslate"><span class="pre">solve</span></code> function that sets up the necessary components of the Hybrid Genetic Search. The components include <code class="docutils literal notranslate"><span class="pre">Population</span></code>, <code class="docutils literal notranslate"><span class="pre">LocalSearch</span></code>, and the <code class="docutils literal notranslate"><span class="pre">PenaltyManager</span></code>. Using these components, we can then initialize the <code class="docutils literal notranslate"><span class="pre">GeneticAlgorithm</span></code> object and run it until our desired <code class="docutils literal notranslate"><span class="pre">StoppingCriterion</span></code> is met.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">solve</span><span class="p">(</span>
+    <span class="n">data</span><span class="p">:</span> <span class="n">ProblemData</span><span class="p">,</span>
+    <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">max_runtime</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_iterations</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">rng</span> <span class="o">=</span> <span class="n">XorShift128</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+    <span class="n">pen_manager</span> <span class="o">=</span> <span class="n">PenaltyManager</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">vehicle_capacity</span><span class="p">)</span>
+    <span class="n">pop</span> <span class="o">=</span> <span class="n">Population</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pen_manager</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">bpd</span><span class="p">)</span>
+
+    <span class="n">nb_params</span> <span class="o">=</span> <span class="n">NeighbourhoodParams</span><span class="p">(</span><span class="n">nb_granular</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+    <span class="n">neighbours</span> <span class="o">=</span> <span class="n">compute_neighbours</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">nb_params</span><span class="p">)</span>
+    <span class="n">ls</span> <span class="o">=</span> <span class="n">LocalSearch</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pen_manager</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">neighbours</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">NODE_OPERATORS</span><span class="p">:</span>
+        <span class="n">ls</span><span class="o">.</span><span class="n">add_node_operator</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pen_manager</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">op</span> <span class="ow">in</span> <span class="n">ROUTE_OPERATORS</span><span class="p">:</span>
+        <span class="n">ls</span><span class="o">.</span><span class="n">add_route_operator</span><span class="p">(</span><span class="n">op</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pen_manager</span><span class="p">))</span>
+
+    <span class="n">ga_params</span> <span class="o">=</span> <span class="n">GeneticAlgorithmParams</span><span class="p">(</span><span class="n">collect_statistics</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">algo</span> <span class="o">=</span> <span class="n">GeneticAlgorithm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">pen_manager</span><span class="p">,</span> <span class="n">rng</span><span class="p">,</span> <span class="n">pop</span><span class="p">,</span> <span class="n">ls</span><span class="p">,</span> <span class="n">srex</span><span class="p">,</span> <span class="n">ga_params</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">max_runtime</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="n">MaxRuntime</span><span class="p">(</span><span class="n">max_runtime</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">assert</span> <span class="n">max_iterations</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="n">stop</span> <span class="o">=</span> <span class="n">MaxIterations</span><span class="p">(</span><span class="n">max_iterations</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">algo</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">stop</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Solving-the-instance">
+<h2>Solving the instance<a class="headerlink" href="#Solving-the-instance" title="Permalink to this heading"></a></h2>
+<p>Now let’s run the algorithm using our <code class="docutils literal notranslate"><span class="pre">solve</span></code> function and compare the result with the best known solution.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">report_gap</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">bks</span><span class="p">):</span>
+    <span class="n">objective</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">best</span><span class="o">.</span><span class="n">cost</span><span class="p">()</span>
+    <span class="n">bks_cost</span> <span class="o">=</span> <span class="n">bks</span><span class="p">[</span><span class="s2">&quot;cost&quot;</span><span class="p">]</span>
+    <span class="n">pct_diff</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="p">(</span><span class="n">objective</span> <span class="o">-</span> <span class="n">bks_cost</span><span class="p">)</span> <span class="o">/</span> <span class="n">bks_cost</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Found a solution with cost: </span><span class="si">{</span><span class="n">objective</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This is </span><span class="si">{</span><span class="n">pct_diff</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% worse than the best known&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;solution, which is </span><span class="si">{</span><span class="n">bks_cost</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">max_runtime</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">report_gap</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">instance_bks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Found a solution with cost: 36549.
+This is 0.4% worse than the best known solution, which is 36391.
+</pre></div></div>
+</div>
+<p>We’ve managed to find a near-optimal solution in 30 seconds! Let’s plot the results.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">instance</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+    <span class="n">plotting</span><span class="o">.</span><span class="n">plot_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">fig</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+
+<span class="n">plot_result</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">instance</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_cvrp_17_0.png" src="../_images/examples_cvrp_17_0.png" />
+</div>
+</div>
+</section>
+<section id="Conclusion">
+<h2>Conclusion<a class="headerlink" href="#Conclusion" title="Permalink to this heading"></a></h2>
+<p>In this notebook, we implemented the Hybrid Genetic Search algorithm to solve a CVRP instance with 493 customers to near-optimality. Moreover, we demonstrated how to use the plotting tools to visualize the instance and statistics obtained throughout the search procedure.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vrptw.html" class="btn btn-neutral float-left" title="Vehicle Routing Problem with Time Windows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../api/pyvrp.html" class="btn btn-neutral float-right" title="PyVRP" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - 2023, PyVRP contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

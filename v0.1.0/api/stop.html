@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stopping criteria &mdash; PyVRP 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Contributing" href="../dev/contributing.html" />
+    <link rel="prev" title="Plotting tools" href="plotting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            PyVRP
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../setup/introduction_to_hgs.html">A brief introduction to HGS for VRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/installation.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/getting_help.html">Getting help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../setup/benchmarks.html">Benchmarks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../examples/vrptw.html">Vehicle Routing Problem with Time Windows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/cvrp.html">Capacitated Vehicle Routing Problem</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API reference</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="pyvrp.html">PyVRP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crossover.html">Crossover operators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diagnostics.html">Diagnostic results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="diversity.html">Diversity measures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="educate.html">Education</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Plotting tools</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Stopping criteria</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.stop.StoppingCriterion.StoppingCriterion"><code class="docutils literal notranslate"><span class="pre">StoppingCriterion</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.stop.MaxIterations.MaxIterations"><code class="docutils literal notranslate"><span class="pre">MaxIterations</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.stop.MaxRuntime.MaxRuntime"><code class="docutils literal notranslate"><span class="pre">MaxRuntime</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.stop.NoImprovement.NoImprovement"><code class="docutils literal notranslate"><span class="pre">NoImprovement</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pyvrp.stop.TimedNoImprovement.TimedNoImprovement"><code class="docutils literal notranslate"><span class="pre">TimedNoImprovement</span></code></a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Developing PyVRP</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../dev/contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../dev/benchmarking.html">Benchmarking</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">PyVRP</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Stopping criteria</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/stop.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <span class="target" id="module-pyvrp.stop"></span><section id="stopping-criteria">
+<h1>Stopping criteria<a class="headerlink" href="#stopping-criteria" title="Permalink to this heading"></a></h1>
+<p>The <a class="reference internal" href="#module-pyvrp.stop" title="pyvrp.stop: Stopping criteria"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pyvrp.stop</span></code></a> module contains the various stopping criteria the <code class="docutils literal notranslate"><span class="pre">pyvrp</span></code> package ships with.
+These can be used to stop the <a class="reference internal" href="pyvrp.html#pyvrp.GeneticAlgorithm.GeneticAlgorithm" title="pyvrp.GeneticAlgorithm.GeneticAlgorithm"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeneticAlgorithm</span></code></a>’s’ search whenever some criterion is met: for example, when some maximum number of iterations or run-time is exceeded.</p>
+<p>All stopping criteria implement the <a class="reference internal" href="#pyvrp.stop.StoppingCriterion.StoppingCriterion" title="pyvrp.stop.StoppingCriterion.StoppingCriterion"><code class="xref py py-class docutils literal notranslate"><span class="pre">StoppingCriterion</span></code></a> protocol.</p>
+<span class="target" id="module-pyvrp.stop.StoppingCriterion"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.stop.StoppingCriterion.StoppingCriterion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">StoppingCriterion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.stop.StoppingCriterion.StoppingCriterion" title="Permalink to this definition"></a></dt>
+<dd><p>Protocol that stopping criteria must implement.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(best)</p></td>
+<td><p>When called, this stopping criterion should return True if the algorithm should stop, and False otherwise.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.stop.MaxIterations"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.stop.MaxIterations.MaxIterations">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MaxIterations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.stop.MaxIterations.MaxIterations" title="Permalink to this definition"></a></dt>
+<dd><p>Criterion that stops after a maximum number of iterations.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(best)</p></td>
+<td><p>Call self as a function.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.stop.MaxRuntime"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.stop.MaxRuntime.MaxRuntime">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">MaxRuntime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_runtime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.stop.MaxRuntime.MaxRuntime" title="Permalink to this definition"></a></dt>
+<dd><p>Criterion that stops after a specified maximum runtime.</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(best)</p></td>
+<td><p>Call self as a function.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.stop.NoImprovement"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.stop.NoImprovement.NoImprovement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">NoImprovement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.stop.NoImprovement.NoImprovement" title="Permalink to this definition"></a></dt>
+<dd><p>Criterion that stops if the best solution has not been improved for a fixed
+number of iterations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>max_iterations</strong></dt><dd><p>The maximum number of non-improving iterations.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(best)</p></td>
+<td><p>Call self as a function.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<span class="target" id="module-pyvrp.stop.TimedNoImprovement"></span><dl class="py class">
+<dt class="sig sig-object py" id="pyvrp.stop.TimedNoImprovement.TimedNoImprovement">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">TimedNoImprovement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_iterations</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)"><span class="pre">int</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_runtime</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.11)"><span class="pre">float</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pyvrp.stop.TimedNoImprovement.TimedNoImprovement" title="Permalink to this definition"></a></dt>
+<dd><p>Stopping criterion that stops after a given number of iterations without
+improvement, or after a fixed runtime (whichever happens first).</p>
+<p class="rubric">Methods</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">__call__</span></code>(best)</p></td>
+<td><p>Call self as a function.</p></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="plotting.html" class="btn btn-neutral float-left" title="Plotting tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../dev/contributing.html" class="btn btn-neutral float-right" title="Contributing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 - 2023, PyVRP contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
